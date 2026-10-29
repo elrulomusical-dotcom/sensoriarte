@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SensoriArte — Ondas Vibroacústicas | Arte Terapéutico e Inclusivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lenis Smooth Scroll: CSS recomendado (desactiva el scroll-behavior nativo mientras Lenis suaviza) -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css">
+    <!-- Script de configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sensori: {
+                            canvas: '#F3EDE0',
+                            night: '#2A3324',
+                            stone: '#9A948B',
+                            green: '#A8C49A',
+                            greenDeep: '#5A7350',
+                            greenMid: '#8FA67E',
+                            sage: '#C5D4BC',
+                            leaf: '#E2EDD8',
+                            mustard: '#E5D4A0',
+                            mustardDeep: '#C9B87A',
+                            mustardSoft: '#F3E8C8',
+                            blue: '#9BB0C4',
+                            cyan: '#A8C49A',
+                            cyanSoft: '#F3E8C8',
+                            purple: '#B5A8C9',
+                            purpleDeep: '#6B4E8E',
+                            gold: '#E5D4A0',
+                            goldSoft: '#F3E8C8',
+                            coral: '#E0A89E',
+                            coralDeep: '#B85A48',
+                            red: '#D89090',
+                            orange: '#E5C89A',
+                            orangeDeep: '#A8662E',
+                            teal: '#A8C4B8',
+                            tealDeep: '#3E7A68',
+                            charcoal: '#5A6B52',
+                            wood: '#8B6914'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                        sketch: ['Patrick Hand', 'cursive'],
+                        wave: ['Caveat', 'cursive'],
+                        display: ['Fraunces', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="css/styles.css?v=mood-all-faces">
+</head>
+<body class="freq-bg text-sensori-charcoal selection:bg-sensori-mustard selection:text-sensori-greenDeep paper-overlay transition-colors duration-300">
+
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <filter id="sketchy"><feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/></filter>
+    </svg>
+
+    <!-- Fondo: color sólido (siempre) + texturas opcionales -->
+    <div id="bg-color-wash" aria-hidden="true"></div>
+    <div id="vanta-texture" class="is-off" aria-hidden="true"></div>
+    <div id="bg-fx-net" class="bg-fx-layer is-off" aria-hidden="true"></div>
+    <div id="bg-fx-waves" class="bg-fx-layer bg-fx-layer--waves is-off" aria-hidden="true"></div>
+    <div id="bg-fx-cells" class="bg-fx-layer bg-fx-layer--cells is-off" aria-hidden="true"></div>
+    <canvas id="granim-bg-canvas" aria-hidden="true"></canvas>
+
+    <canvas id="spore-canvas" aria-hidden="true"></canvas>
+
+    <!-- SKIP LINK -->
+    <a href="#contenido-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-sensori-mustard focus:text-sensori-greenDeep focus:p-3 focus:z-50 focus:rounded-md focus:font-bold" data-i18n="skip">
+        Saltar al contenido principal
+    </a>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="site-nav sticky top-0 bg-sensori-canvas/95 backdrop-blur-md shadow-sm border-b-2 border-dashed border-sensori-mustard/30 z-50 transition-all duration-300" role="navigation" aria-label="Navegación principal">
+        <div class="site-nav__inner flex justify-between items-center gap-3">
+            <div class="nav-logo-link flex items-center shrink-0 min-w-0">
+                <!-- Logo redondo = botón encendido / apagado (luz cian al activar) -->
+                <input type="checkbox" id="nav-logo-power" class="nav-logo-power-input" aria-label="Abrir o cerrar el ADN musical (xilófono de vidrio)">
+                <label for="nav-logo-power" class="nav-logo-power-btn nav-logo-wrap shrink-0" title="ADN musical — encender / apagar">
+                    <span class="nav-logo-power-face">
+                        <img src="img/LogoSensoriarte.png" alt="" class="nav-logo-power-img" onerror="this.src='https://placehold.co/100x100/F5F5F5/1E88E5?text=SA'">
+                    </span>
+                </label>
+                <a href="#inicio" class="hidden md:block nav-brand text-left min-w-0 rounded-lg focus:ring-2 focus:ring-sensori-mustard" aria-label="SensoriArte — Inicio">
+                    <div class="nav-brand-name">
+                        <span class="nav-brand-leaf" aria-hidden="true">
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><path d="M4.5 13C4.5 13 1 9.5 1 5.5C1 3 2.5 1 4.5 1C6.5 1 8 3 8 5.5C8 9.5 4.5 13 4.5 13Z" fill="#A8C49A" stroke="#6B8F5E" stroke-width="0.8"/><line x1="4.5" y1="7" x2="4.5" y2="13" stroke="#6B8F5E" stroke-width="0.7"/></svg>
+                            <svg width="7" height="11" viewBox="0 0 7 11" fill="none" style="transform:rotate(-15deg)"><path d="M3.5 10C3.5 10 1 7.5 1 4.5C1 2.5 2 1 3.5 1C5 1 6 2.5 6 4.5C6 7.5 3.5 10 3.5 10Z" fill="#C5D4BC" stroke="#6B8F5E" stroke-width="0.7"/></svg>
+                        </span>
+                        SensoriArte
+                        <span class="nav-brand-leaf" aria-hidden="true" style="transform:scaleX(-1)">
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><path d="M4.5 13C4.5 13 1 9.5 1 5.5C1 3 2.5 1 4.5 1C6.5 1 8 3 8 5.5C8 9.5 4.5 13 4.5 13Z" fill="#E5D4A0" stroke="#B8962A" stroke-width="0.8"/><line x1="4.5" y1="7" x2="4.5" y2="13" stroke="#B8962A" stroke-width="0.7"/></svg>
+                            <svg width="7" height="11" viewBox="0 0 7 11" fill="none" style="transform:rotate(-15deg)"><path d="M3.5 10C3.5 10 1 7.5 1 4.5C1 2.5 2 1 3.5 1C5 1 6 2.5 6 4.5C6 7.5 3.5 10 3.5 10Z" fill="#A8C4B8" stroke="#4a7060" stroke-width="0.7"/></svg>
+                        </span>
+                    </div>
+                    <div class="nav-brand-tagline" data-i18n="nav_brand_sub">Arte terapéutico e inclusivo</div>
+                </a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 flex items-center justify-center text-sensori-greenDeep hover:text-sensori-mustard focus:outline-none" aria-label="Abrir menú" aria-expanded="false" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <div class="hidden md:flex items-center gap-2 text-base font-medium">
+                <div class="nav-icon-hub" id="nav-icon-hub">
+                    <div class="nav-icon-wrap">
+                        <button type="button" class="nav-icon-btn" id="nav-icon-nosotros" aria-label="Nosotros" aria-expanded="false" aria-controls="popover-nosotros">
+                            <i data-lucide="users"></i>
+                        </button>
+                        <div class="nav-icon-popover nav-icon-popover--nosotros" id="popover-nosotros" hidden role="region" aria-label="Nosotros">
+                            <div class="popover-body popover-nosotros-layout">
+                                <div>
+                                    <p data-i18n="nav_pop_nosotros">Conoce quiénes somos y nuestra experiencia reunida en Padre Hurtado.</p>
+                                    <a href="#quienes-somos" class="popover-ir-btn" data-i18n="btn_ir">ir</a>
+                                </div>
+                                <div class="popover-relief-logo" aria-hidden="true">
+                                    <img src="img/LogoSensoriarte.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-icon-wrap">
+                        <button type="button" class="nav-icon-btn" id="nav-icon-frecuencias" aria-label="Frecuencias" aria-expanded="false" aria-controls="popover-frecuencias">
+                            <i data-lucide="audio-lines"></i>
+                        </button>
+                        <div class="nav-icon-popover nav-icon-popover--freq" id="popover-frecuencias" hidden role="region" aria-label="Frecuencias">
+                            <div class="popover-fx-layer popover-heartbeat" aria-hidden="true">
+                                <svg viewBox="0 0 200 36" preserveAspectRatio="none">
+                                    <path class="hb-line" d="M0,18 L30,18 L38,8 L46,28 L54,18 L90,18 L98,10 L106,26 L114,18 L200,18"/>
+                                </svg>
+                            </div>
+                            <div class="popover-body">
+                                <p data-i18n="nav_pop_freq">Cinco áreas de trabajo sensorial. Elige una frecuencia:</p>
+                                <div class="popover-freq-list">
+                                    <div class="popover-freq-row"><span data-i18n="freq_musical">40 Hz · Musical Inmersivo</span><a href="frecuencias/musical-inmersiva.html" class="popover-ir-btn" data-i18n="btn_ir">ir</a></div>
+                                    <div class="popover-freq-row"><span data-i18n="freq_vr">VR · Realidad Mixta</span><a href="frecuencias/realidad-mixta.html" class="popover-ir-btn" data-i18n="btn_ir">ir</a></div>
+                                    <div class="popover-freq-row"><span data-i18n="freq_neuro">Música neurodivergencia</span><a href="frecuencias/musica-neurodivergencia.html" class="popover-ir-btn" data-i18n="btn_ir">ir</a></div>
+                                    <div class="popover-freq-row"><span data-i18n="freq_cuidadoras">Cuidadoras & Familia</span><a href="frecuencias/cuidadoras-familia.html" class="popover-ir-btn" data-i18n="btn_ir">ir</a></div>
+                                    <div class="popover-freq-row"><span data-i18n="freq_cap">Capacitación</span><a href="frecuencias/capacitacion.html" class="popover-ir-btn" data-i18n="btn_ir">ir</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-icon-wrap">
+                        <button type="button" class="nav-icon-btn" id="nav-icon-terapias" aria-label="Terapias" aria-expanded="false" aria-controls="popover-terapias">
+                            <i data-lucide="heart-handshake"></i>
+                        </button>
+                        <div class="nav-icon-popover nav-icon-popover--terapias" id="popover-terapias" hidden role="region" aria-label="Terapias">
+                            <div class="popover-fx-layer popover-hands-ring" aria-hidden="true">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(168,196,154,0.4)" stroke-width="1" stroke-dasharray="4 6"/>
+                                    <g fill="rgba(143,166,126,0.55)" stroke="none">
+                                        <circle cx="50" cy="14" r="5"/><circle cx="82" cy="32" r="5"/><circle cx="82" cy="68" r="5"/>
+                                        <circle cx="50" cy="86" r="5"/><circle cx="18" cy="68" r="5"/><circle cx="18" cy="32" r="5"/>
+                                    </g>
+                                    <path d="M46,14 Q50,28 54,14 M78,34 Q68,42 82,38 M78,66 Q68,58 82,62 M46,86 Q50,72 54,86 M22,66 Q32,58 18,62 M22,34 Q32,42 18,38" fill="none" stroke="rgba(143,166,126,0.5)" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="popover-body">
+                                <p data-i18n="nav_pop_therapies">Experiencias terapéuticas gratuitas con calor humano y tecnología segura.</p>
+                                <a href="#terapias" class="popover-ir-btn" data-i18n="btn_ir">ir</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-icon-wrap">
+                        <button type="button" class="nav-icon-btn" id="nav-icon-contacto" aria-label="Contacto" aria-expanded="false" aria-controls="popover-contacto">
+                            <i data-lucide="mail"></i>
+                        </button>
+                        <div class="nav-icon-popover" id="popover-contacto" hidden role="region" aria-label="Contacto">
+                            <div class="popover-body">
+                                <p data-i18n="nav_pop_contact">Escríbenos para orientación, talleres o charlas comunitarias.</p>
+                                <a href="#contacto" class="popover-ir-btn" data-i18n="btn_ir">ir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown-access a11y-menu-wrap ml-1" id="nav-access-dropdown">
+                    <button type="button" class="a11y-menu-btn" id="nav-access-btn" aria-haspopup="true" aria-expanded="false" aria-label="Accesibilidad">
+                        <i data-lucide="accessibility" class="access-symbol" aria-hidden="true"></i>
+                    </button>
+                    <div class="a11y-submenu" id="nav-access-panel" role="menu" aria-label="Opciones de accesibilidad">
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-adhd" data-access="adhd" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('adhd')">
+                                <span class="a11y-submenu-label"><i data-lucide="infinity" class="a11y-submenu-icon"></i><span data-i18n="acc_adhd">Foco TDAH</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-motion" data-access="motion" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('motion')">
+                                <span class="a11y-submenu-label"><i data-lucide="pause-circle" class="a11y-submenu-icon"></i><span data-i18n="acc_motion">Frenar animaciones</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-minimal" data-access="minimal" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('minimal')">
+                                <span class="a11y-submenu-label"><i data-lucide="minimize-2" class="a11y-submenu-icon"></i><span data-i18n="acc_minimal">Sitio minimalista</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-spacing" data-access="spacing" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('spacing')">
+                                <span class="a11y-submenu-label"><i data-lucide="move-horizontal" class="a11y-submenu-icon"></i><span data-i18n="acc_spacing">Espaciado</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-contrast" data-access="contrast" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('contrast')">
+                                <span class="a11y-submenu-label"><i data-lucide="contrast" class="a11y-submenu-icon"></i><span data-i18n="acc_contrast">Alto contraste</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-dyslexic" data-access="dyslexic" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('dyslexic')">
+                                <span class="a11y-submenu-label"><i data-lucide="type" class="a11y-submenu-icon"></i><span data-i18n="acc_dyslexic">Tipografía fácil</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link" id="toggle-giant" data-access="giant" aria-pressed="false" role="menuitemcheckbox" onclick="toggleAccessFeature('giant')">
+                                <span class="a11y-submenu-label"><i data-lucide="zoom-in" class="a11y-submenu-icon"></i><span data-i18n="acc_giant">Letra gigante</span></span>
+                                <span class="a11y-submenu-switch" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="a11y-submenu-item">
+                            <button type="button" class="a11y-submenu-link a11y-submenu-link--action" role="menuitem" onclick="readAloudPage()">
+                                <span class="a11y-submenu-label"><i data-lucide="volume-2" class="a11y-submenu-icon"></i><span data-i18n="acc_read">Leer página</span></span>
+                                <span class="a11y-submenu-state" id="speech-toggle-btn" data-i18n="acc_read_btn">Activar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="nav-link-pill nav-btn-lang" id="lang-toggle-btn" onclick="toggleLanguage()" aria-label="Cambiar idioma">ES</button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden mt-3 bg-sensori-canvas border-t border-sensori-mustard/25 py-4 px-3 space-y-3" aria-label="Navegación móvil">
+            <div class="grid grid-cols-4 gap-2">
+                <a href="#quienes-somos" onclick="toggleMobileMenu()" class="nav-icon-btn w-full h-auto py-3" aria-label="Nosotros">
+                    <i data-lucide="users"></i>
+                    <span class="text-sm font-semibold mt-1" data-i18n="nav_about">Nosotros</span>
+                </a>
+                <button type="button" onclick="document.getElementById('mobile-freq-panel').classList.toggle('hidden')" class="nav-icon-btn w-full h-auto py-3" aria-label="Frecuencias">
+                    <i data-lucide="audio-lines"></i>
+                    <span class="text-sm font-semibold mt-1" data-i18n="nav_freq">Frecuencias</span>
+                </button>
+                <a href="#terapias" onclick="toggleMobileMenu()" class="nav-icon-btn w-full h-auto py-3" aria-label="Terapias">
+                    <i data-lucide="heart-handshake"></i>
+                    <span class="text-sm font-semibold mt-1" data-i18n="nav_therapies">Terapias</span>
+                </a>
+                <a href="#contacto" onclick="toggleMobileMenu()" class="nav-icon-btn w-full h-auto py-3" aria-label="Contacto">
+                    <i data-lucide="mail"></i>
+                    <span class="text-sm font-semibold mt-1" data-i18n="nav_contact">Contacto</span>
+                </a>
+            </div>
+            <div id="mobile-freq-panel" class="hidden space-y-1 px-1">
+                <p class="text-base text-sensori-greenDeep px-2 pb-1" data-i18n="nav_pop_freq">Cinco áreas de trabajo sensorial:</p>
+                <a href="frecuencias/musical-inmersiva.html" class="nav-dropdown-link nav-dropdown-link--musical mx-1" data-i18n="freq_musical">40 Hz · Musical Inmersivo</a>
+                <a href="frecuencias/realidad-mixta.html" class="nav-dropdown-link nav-dropdown-link--vr mx-1" data-i18n="freq_vr">VR · Realidad Mixta</a>
+                <a href="frecuencias/musica-neurodivergencia.html" class="nav-dropdown-link nav-dropdown-link--neuro mx-1" data-i18n="freq_neuro">Música neurodivergencia</a>
+                <a href="frecuencias/cuidadoras-familia.html" class="nav-dropdown-link nav-dropdown-link--cuidadoras mx-1" data-i18n="freq_cuidadoras">Cuidadoras & Familia</a>
+                <a href="frecuencias/capacitacion.html" class="nav-dropdown-link nav-dropdown-link--cap mx-1" data-i18n="freq_cap">Capacitación</a>
+            </div>
+            <button type="button" onclick="toggleLanguage()" class="nav-link-pill nav-btn-lang w-full justify-center" id="lang-toggle-mobile">ES</button>
+            <div class="md:hidden access-panel-inner mx-2 mt-2">
+                <div class="access-row"><span class="access-row-label" data-i18n="acc_adhd">Foco TDAH</span><button type="button" class="access-toggle" data-access="adhd" onclick="toggleAccessFeature('adhd')"></button></div>
+                <div class="access-row"><span class="access-row-label" data-i18n="acc_motion">Frenar animaciones</span><button type="button" class="access-toggle" data-access="motion" onclick="toggleAccessFeature('motion')"></button></div>
+                <div class="access-row"><span class="access-row-label" data-i18n="acc_minimal">Sitio minimalista</span><button type="button" class="access-toggle" data-access="minimal" onclick="toggleAccessFeature('minimal')"></button></div>
+                <div class="access-row"><span class="access-row-label" data-i18n="acc_giant">Letra gigante</span><button type="button" class="access-toggle" data-access="giant" onclick="toggleAccessFeature('giant')"></button></div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="contenido-principal" class="relative overflow-hidden">
+
+        <!-- AROS / ONDAS DECORATIVAS -->
+        <div class="wave-ring bg-sensori-green w-[340px] h-[340px] top-10 left-[-110px]"></div>
+        <div class="wave-ring bg-sensori-mustardSoft w-[280px] h-[280px] top-[40%] right-[-100px]"></div>
+        <div class="wave-ring bg-sensori-sage w-[380px] h-[380px] bottom-[10%] left-[-150px]"></div>
+
+        <!-- SECCIÓN 1: INICIO — hero 2.5D/3D con capas en paralaje (scroll + mouse) -->
+        <section id="inicio" class="relative z-10">
+            <p class="sr-only">Ilustración en acuarela de un bosque con un arroyo y un monumento de piedra antiguo cubierto de flores silvestres y musgo, con un símbolo sagrado tallado — representa la sanación a través del arte y la naturaleza.</p>
+            <div class="hero-stage" id="hero-stage">
+                <div class="hero-parallax-root" id="hero-parallax-root">
+
+                    <!-- Capa 16 — Fondo absoluto: atmósfera y montañas lejanas -->
+                    <div class="hero-layer hero-layer--bg" data-layer="16" data-depth="0.05" style="z-index:1;" aria-hidden="true">
+                        <img src="img/capas-png/16.png" alt="" class="hero-layer-img hero-layer-img--cover" draggable="false" onerror="this.closest('.hero-stage').classList.add('hero-stage--fallback')">
+                    </div>
+
+                    <!-- Capa 15 — Cielo y nubes -->
+                    <div class="hero-layer" data-layer="15" data-depth="0.10" style="z-index:2; left:-4%; top:-3%; width:108%;" aria-hidden="true">
+                        <img src="img/capas-png/15.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 14 — Montañas lejanas -->
+                    <div class="hero-layer hero-layer--feather" data-layer="14" data-depth="0.16" style="z-index:3; left:6%; top:3%; width:68%;" aria-hidden="true">
+                        <img src="img/capas-png/14.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 13 — Montañas cercanas, más verdes -->
+                    <div class="hero-layer hero-layer--feather" data-layer="13" data-depth="0.22" style="z-index:4; left:30%; top:12%; width:64%;" aria-hidden="true">
+                        <img src="img/capas-png/13.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 12 — Valle con río (plano medio) -->
+                    <div class="hero-layer hero-layer--feather" data-layer="12" data-depth="0.28" style="z-index:5; left:0%; top:30%; width:62%;" aria-hidden="true">
+                        <img src="img/capas-png/12.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 11 — Árboles y ladera con prado -->
+                    <div class="hero-layer hero-layer--feather" data-layer="11" data-depth="0.34" style="z-index:6; left:44%; top:32%; width:58%;" aria-hidden="true">
+                        <img src="img/capas-png/11.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 10 — Árbol solitario entre neblina -->
+                    <div class="hero-layer hero-layer--feather" data-layer="10" data-depth="0.40" style="z-index:7; left:5%; top:20%; width:15%;" aria-hidden="true">
+                        <img src="img/capas-png/10.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 9 — Matorrales y flores silvestres -->
+                    <div class="hero-layer hero-layer--feather" data-layer="9" data-depth="0.46" style="z-index:8; left:-2%; top:58%; width:32%;" aria-hidden="true">
+                        <img src="img/capas-png/9.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 8 — Rama de árbol en primer plano (esquina superior) -->
+                    <div class="hero-layer hero-layer--feather" data-layer="8" data-depth="0.52" style="z-index:9; left:-3%; top:-4%; width:34%;" aria-hidden="true">
+                        <img src="img/capas-png/8.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 7 — Flores silvestres de color -->
+                    <div class="hero-layer hero-layer--feather-soft" data-layer="7" data-depth="0.58" style="z-index:10; left:0%; top:64%; width:27%;" aria-hidden="true">
+                        <img src="img/capas-png/7.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 6 — Primer plano: monolito / símbolo central (medido por alto para no cortar la base) -->
+                    <div class="hero-layer hero-layer--monolith" id="hero-layer-monolith" data-layer="6" data-depth="0.64" style="z-index:11; left:58%; top:27%; height:56%;" aria-hidden="true">
+                        <!-- Sombra de contacto: ancla visualmente el monolito al suelo -->
+                        <div class="hero-monolith-shadow"></div>
+                        <img src="img/capas-png/6.png" alt="" class="hero-layer-img" id="hero-stage-img" draggable="false">
+                        <!-- Caracol pegado a la esquina inferior derecha, sobre el zócalo (no es capa suelta) -->
+                        <div class="hero-snail">
+                            <img src="img/capas-png/3.png" alt="" class="hero-snail-img" draggable="false">
+                        </div>
+                        <!-- Tierra/pasto que cubre el corte recto de la base, como si emergiera del suelo -->
+                        <div class="hero-monolith-ground"></div>
+                        <!-- Puntos secretos: viajan pegados al monolito -->
+                        <div class="hero-secret-overlay" id="hero-secret-overlay">
+                            <div class="hero-secret-pt" id="hsp-0" data-pt="0" style="top:37%;left:55%;width:15%;height:13%;transform:translate(-50%,-50%);"></div>
+                            <div class="hero-secret-pt" id="hsp-1" data-pt="1" style="top:41%;left:31%;width:13%;height:11%;transform:translate(-50%,-50%);"></div>
+                            <div class="hero-secret-pt" id="hsp-2" data-pt="2" style="top:40%;left:80%;width:13%;height:11%;transform:translate(-50%,-50%);"></div>
+                            <div class="hero-secret-pt" id="hsp-3" data-pt="3" style="top:71%;left:39%;width:13%;height:11%;transform:translate(-50%,-50%);"></div>
+                            <div class="hero-secret-pt" id="hsp-4" data-pt="4" style="top:72%;left:69%;width:13%;height:11%;transform:translate(-50%,-50%);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Capa 5 — Mariposa (pequeña), cerca de las flores del monolito -->
+                    <div class="hero-layer hero-layer--soft" data-layer="5" data-depth="0.75" style="z-index:12; left:50%; top:23%; width:4.5%;" aria-hidden="true">
+                        <img src="img/capas-png/5.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 4 — Mariposa -->
+                    <div class="hero-layer hero-layer--soft" data-layer="4" data-depth="0.81" style="z-index:13; left:67%; top:23%; width:5.5%;" aria-hidden="true">
+                        <img src="img/capas-png/4.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 2 — Flores de primer plano -->
+                    <div class="hero-layer hero-layer--feather-soft" data-layer="2" data-depth="0.94" style="z-index:15; left:84%; top:64%; width:14%;" aria-hidden="true">
+                        <img src="img/capas-png/2.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                    <!-- Capa 1 — Follaje más cercano a la pantalla (bajada para que su borde
+                         recto no quede a la vista contra el fondo aclarado del texto) -->
+                    <div class="hero-layer hero-layer--feather-soft" data-layer="1" data-depth="1.00" style="z-index:16; left:0%; top:84%; width:21%;" aria-hidden="true">
+                        <img src="img/capas-png/1.png" alt="" class="hero-layer-img" draggable="false">
+                    </div>
+
+                </div>
+
+                <!-- Gradiente animado sobre la ilustración (mezcla de color, deja ver el paisaje debajo) -->
+                <canvas id="hero-gradient-overlay" aria-hidden="true"></canvas>
+
+                <!-- Fundido inferior: disuelve el corte recto de la ilustración contra el fondo de la página -->
+                <div class="hero-stage-ground-fade" aria-hidden="true"></div>
+
+                <!-- Resplandor suave tras el texto, sin recuadro duro -->
+                <div class="hero-stage-scrim" aria-hidden="true"></div>
+
+                <!-- Contenido sobrepuesto (estable, no participa del paralaje) -->
+                <div class="hero-stage-content">
+                    <div id="text-hero-container" class="contents">
+                        <div class="hero-text-col">
+                            <span class="freq-tag" data-i18n="hero_badge">Espacio de Sanación & Inclusión Gratuita</span>
+                            <h1 class="text-3xl md:text-4xl lg:text-5xl font-sans font-bold text-sensori-greenDeep leading-[1.3] pb-1" data-i18n="hero_title">
+                                Donde el arte y la tecnología se vuelven <span class="font-display italic font-medium bg-gradient-to-r from-sensori-orangeDeep to-sensori-coralDeep bg-clip-text text-transparent">un abrazo</span>
+                            </h1>
+                            <div class="hero-desc-box" id="hero-desc-box">
+                                <p class="text-xl md:text-2xl font-medium text-sensori-night leading-relaxed font-sans" id="hero-desc-text" data-i18n="hero_desc">
+                                    Ofrecemos un refugio acogedor de terapias gratuitas, talleres artísticos sensoriales y charlas accesibles en Padre Hurtado. Transformamos la tecnología en puentes de contención para personas con discapacidad, personas mayores y sus cuidadores.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Botón centrado respecto a todo el ancho útil del hero -->
+                        <div class="hero-cta-breakout pt-2 pr-0 md:pr-8 lg:pr-16">
+                            <div class="flex justify-center px-4">
+                                <a href="#talleres" class="bg-sensori-greenMid hover:bg-sensori-mustard text-white px-8 py-4 rounded-full font-semibold shadow-md transition-all flex items-center gap-2 text-base md:text-base focus:ring-4 focus:ring-sensori-mustard/30">
+                                    <span data-i18n="hero_cta1">Explorar Frecuencias</span>
+                                    <i data-lucide="arrow-down" class="w-5 h-5" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Cita flotante sobre el cielo/montañas, esquina superior derecha del hero -->
+                        <div class="hero-quote hero-quote--floating flex items-center justify-center gap-3">
+                            <svg class="w-8 h-3 text-sensori-cyan shrink-0" viewBox="0 0 100 20" fill="none" aria-hidden="true">
+                                <path d="M0,10 Q12.5,0 25,10 T50,10 T75,10 T100,10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                            <p class="text-lg md:text-xl tracking-wide text-sensori-purpleDeep font-hand text-center">
+                                "El sendero del arte nos integra a todos bajo el mismo sol"
+                            </p>
+                            <svg class="w-8 h-3 text-sensori-purple shrink-0" viewBox="0 0 100 20" fill="none" aria-hidden="true">
+                                <path d="M0,10 Q12.5,0 25,10 T50,10 T75,10 T100,10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✦ Momento Relax 1 — esquina inferior derecha del hero -->
+                <div class="relax-trigger-wrap">
+                    <div class="hero-relax-switch">
+                        <input type="checkbox" id="relax1-checkbox" class="relax-toggle-input" onchange="toggleRelax1()" aria-label="Activar Momento Relax: burbujas con instrumentos">
+                        <label class="relax-toggle" for="relax1-checkbox">
+                            <span class="relax-toggle__circle"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Cómo me siento — esquina inferior izquierda del hero -->
+                <div class="hero-regulation-hub" aria-label="Herramientas de regulación emocional">
+                    <div class="hero-mood-zone">
+                        <span class="hero-mood-label" id="hero-mood-label">Cómo me siento</span>
+                        <!-- From Uiverse.io by JkHuger — adaptado a SensoriArte -->
+                        <div class="mood-rating rating" role="radiogroup" aria-labelledby="hero-mood-label">
+                            <label class="mood-rating__opt" title="Me siento bien">
+                                <input type="radio" class="super-happy" name="hero-mood" id="mood-btn-happy" value="happy" data-mood="happy" aria-label="Me siento bien">
+                                <svg class="svg" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-3.2 7.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zm6.4 0a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM12 17.2c-2.2 0-4.1-1.2-5-3h10c-.9 1.8-2.8 3-5 3z"/>
+                                </svg>
+                            </label>
+                            <label class="mood-rating__opt" title="Me siento neutro">
+                                <input type="radio" class="neutral" name="hero-mood" id="mood-btn-neutral" value="neutral" data-mood="neutral" aria-label="Me siento neutro">
+                                <svg class="svg" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-3.2 7.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zm6.4 0a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM7.8 14.8h8.4v1.6H7.8z"/>
+                                </svg>
+                            </label>
+                            <label class="mood-rating__opt" title="Me siento triste">
+                                <input type="radio" class="super-sad" name="hero-mood" id="mood-btn-sad" value="sad" data-mood="sad" aria-label="Me siento triste">
+                                <svg class="svg" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-3.5 6.2 1.1 1.1L8.5 10.5l1.1 1.1-1.1 1.1-1.1-1.1-1.1 1.1-1.1-1.1 1.1-1.1-1.1-1.1 1.1-1.1 1.1 1.1 1.1-1.1zm8.2 0 1.1 1.1-1.1 1.1 1.1 1.1-1.1 1.1-1.1-1.1-1.1 1.1-1.1-1.1 1.1-1.1-1.1-1.1 1.1-1.1 1.1 1.1 1.1-1.1zM12 13.6c2.1 0 3.9 1.1 4.8 2.8H7.2c.9-1.7 2.7-2.8 4.8-2.8z"/>
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: QUIÉNES SOMOS -->
+        <section id="quienes-somos" class="py-20 px-4 md:px-8 relative">
+            <div class="max-w-7xl mx-auto zone-content zone-content--with-bg-play">
+                <!-- Jugar con el fondo — esquina exterior superior izquierda del cuadro -->
+                <aside class="bg-play-panel" id="bg-play-panel" aria-label="Jugar con el fondo">
+                    <p class="bg-play-panel__title">Jugar con el fondo</p>
+                    <div class="bg-play-panel__btns" role="group" aria-label="Efectos de fondo">
+                        <button type="button" class="bg-play-btn" id="bg-fx-1" data-fx="cells" aria-pressed="false" title="Células" aria-label="Activar células">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="9" r="3.2"/><circle cx="16" cy="8" r="2.6"/><circle cx="12" cy="16" r="3.4"/><circle cx="18" cy="15" r="2.2"/></svg>
+                        </button>
+                        <button type="button" class="bg-play-btn" id="bg-fx-2" data-fx="waves" aria-pressed="false" title="Ondas" aria-label="Activar ondas">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 10c2-3 4 3 6 0s4 3 6 0 4 3 6 0"/><path d="M3 15c2-3 4 3 6 0s4 3 6 0 4 3 6 0"/><path d="M3 20c2-3 4 3 6 0s4 3 6 0 4 3 6 0"/></svg>
+                        </button>
+                        <button type="button" class="bg-play-btn" id="bg-fx-3" data-fx="net" aria-pressed="false" title="Red de puntos" aria-label="Activar red de puntos">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="6" cy="7" r="1.4" fill="currentColor"/><circle cx="18" cy="6" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="5" cy="17" r="1.4" fill="currentColor"/><circle cx="19" cy="17" r="1.4" fill="currentColor"/><path d="M6 7l6 5 6-6M12 12L5 17M12 12l7 5"/></svg>
+                        </button>
+                        <button type="button" class="bg-play-btn" id="bg-fx-4" data-fx="lines" aria-pressed="false" title="Líneas en movimiento" aria-label="Activar líneas en movimiento">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 8c3-4 6 4 9 0s6 4 9 0"/><path d="M3 14c3-4 6 4 9 0s6 4 9 0"/><path d="M3 20c3-4 6 4 9 0s6 4 9 0"/></svg>
+                        </button>
+                    </div>
+                </aside>
+                <div class="tea-calm-texture freq-panel p-10 md:p-16 rounded-3xl torn-edge-2 space-y-6 border border-sensori-green/20 relative">
+                    <div class="max-w-3xl space-y-6">
+                        <span class="freq-tag freq-tag-xl text-sensori-greenDeep">✦ Experiencia Reunida</span>
+                        <h2 class="text-3xl md:text-4xl font-hand font-bold text-sensori-greenDeep">Un equipo, muchos caminos hacia la inclusión</h2>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                            SensoriArte nace de la unión de terapeutas, artistas, gestores sociales y personas con trayectoria en trabajo comunitario, educación inclusiva y estimulación sensorial. No mostramos nombres individuales al inicio del proyecto: hablamos de la <strong>experiencia reunida</strong> que diseña cada encuentro con rigor, empatía y respeto por la diversidad.
+                        </p>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                            Contamos con <strong>equipamiento terapéutico y tecnológico</strong> —camillas vibracionales, entornos inmersivos calibrados, instrumentos adaptados y espacios de contención— seleccionado para ofrecer seguridad física y emocional. Por razones de protección de la comunidad, no detallamos inventario en la web; en persona te orientamos con transparencia.
+                        </p>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                            Basamos nuestras metodologías en estándares de estimulación multisensorial. El uso de frecuencias de resonancia de 40 Hz y 44 Hz permite terapias vibroacústicas complementarias, enfocadas en la regulación del estrés y el bienestar sin recurrir a intervenciones invasivas.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="bg-sensori-green/12 text-sensori-greenDeep text-base font-semibold px-3 py-1 rounded-md">Rigor clínico</span>
+                            <span class="bg-sensori-mustard/15 text-sensori-mustardDeep text-base font-semibold px-3 py-1 rounded-md">Arte inclusivo</span>
+                            <span class="bg-sensori-sage/20 text-sensori-greenDeep text-base font-semibold px-3 py-1 rounded-md">Equipos seguros</span>
+                        </div>
+                        <a href="#talleres" class="inline-flex items-center gap-2 text-base font-bold text-sensori-greenDeep hover:text-sensori-mustard transition-colors pt-2">
+                            Explorar las cinco frecuencias <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+
+                    <!-- ✦ Momento Relax 2 — interruptor que abre/cierra el juego Tres en Raya -->
+                    <div class="relax-trigger-wrap">
+                        <div class="hero-relax-switch">
+                            <input type="checkbox" id="relax2-checkbox" class="relax-toggle-input" onchange="toggleTTT()" aria-label="Abrir juego tres en raya">
+                            <label class="relax-toggle" for="relax2-checkbox">
+                                <span class="relax-toggle__circle"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TALLERES (FRECUENCIAS) -->
+        <section id="talleres" class="section-zone-2 py-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <canvas class="zone-particles-canvas" aria-hidden="true"></canvas>
+            <div class="zone-content">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="freq-tag text-sensori-coralDeep">Bandas de Trabajo</span>
+                <h2 class="text-3xl md:text-4xl font-hand font-bold text-sensori-greenDeep" data-i18n="sec_freq_title">Cinco Frecuencias de Transformación</h2>
+                <p class="text-gray-600 text-base md:text-lg" data-i18n="sec_freq_desc">
+                    Cinco áreas de trabajo continuo, libres de barreras, diseñadas para estimular, sanar y capacitar. Elige una frecuencia para conocerla en profundidad:
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 mb-6">
+                <div class="glow-frame w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+                <article class="glow-frame-inner freq-panel freq-card p-8 rounded-3xl hover:shadow-lg transition-all border-l-4 border-[#8B6914] h-full" data-freq-id="musical">
+                    <div class="freq-card-fx freq-card-fx--waves" aria-hidden="true"><svg viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M0,40 Q25,20 50,40 T100,40 T150,40 T200,40"/><path d="M0,55 Q30,35 60,55 T120,55 T180,55"/></svg></div>
+                    <span class="text-base font-bold text-[#8B6914] uppercase tracking-wider">40 Hz</span>
+                    <h3 class="font-hand text-xl font-bold text-sensori-purpleDeep mt-1">Musical Inmersivo</h3>
+                    <p class="text-base text-gray-600 mt-2">Instrumentos reales con vibraciones que relajan el cuerpo.</p>
+                    <button type="button" class="freq-open-btn" data-freq-id="musical">Explorar frecuencia <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </article>
+                </div>
+                <div class="glow-frame w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+                <article class="glow-frame-inner freq-panel freq-card p-8 rounded-3xl hover:shadow-lg transition-all border-l-4 border-sensori-teal h-full" data-freq-id="vr">
+                    <div class="freq-card-fx freq-card-fx--vr" aria-hidden="true"><svg viewBox="0 0 100 80"><circle cx="20" cy="40" r="4" fill="#3949AB"/><circle cx="50" cy="30" r="3" fill="#3949AB"/><circle cx="80" cy="45" r="4" fill="#3949AB"/><line x1="20" y1="40" x2="50" y2="30" stroke="#3949AB" stroke-width="1"/><line x1="50" y1="30" x2="80" y2="45" stroke="#3949AB" stroke-width="1"/></svg></div>
+                    <span class="text-base font-bold text-sensori-teal uppercase tracking-wider">VR</span>
+                    <h3 class="font-hand text-xl font-bold text-sensori-purpleDeep mt-1">Realidad Mixta</h3>
+                    <p class="text-base text-gray-600 mt-2">Explorar mundos virtuales con controles adaptados.</p>
+                    <button type="button" class="freq-open-btn" data-freq-id="vr">Explorar frecuencia <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </article>
+                </div>
+                <div class="glow-frame w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+                <article class="glow-frame-inner freq-panel freq-card p-8 rounded-3xl hover:shadow-lg transition-all border-l-4 border-sensori-green h-full" data-freq-id="neuro">
+                    <div class="freq-card-fx freq-card-fx--neuro" aria-hidden="true"><svg viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,30 L40,30 M60,30 L100,30 M120,30 L160,30 M180,30 L200,30" stroke-width="2" fill="none"/><path d="M0,45 Q50,25 100,45 T200,45" fill="none" stroke-width="1.5"/></svg></div>
+                    <span class="text-base font-bold text-sensori-green uppercase tracking-wider">Gratuito</span>
+                    <h3 class="font-hand text-xl font-bold text-sensori-purpleDeep mt-1">Música para la neurodivergencia</h3>
+                    <p class="text-base text-gray-600 mt-2">Clases instrumentales con aprendizaje alternativo.</p>
+                    <button type="button" class="freq-open-btn" data-freq-id="neuro">Explorar frecuencia <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </article>
+                </div>
+                <div class="glow-frame w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+                <article class="glow-frame-inner freq-panel freq-card p-8 rounded-3xl hover:shadow-lg transition-all border-l-4 border-sensori-coral h-full" data-freq-id="cuidadoras">
+                    <div class="freq-card-fx freq-card-fx--coral" aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M60,70 C40,50 20,40 60,20 C100,40 80,50 60,70" fill="none" stroke-width="1.5"/></svg></div>
+                    <span class="text-base font-bold text-sensori-coral uppercase tracking-wider">Contención</span>
+                    <h3 class="font-hand text-xl font-bold text-sensori-purpleDeep mt-1">Cuidadoras & Familia</h3>
+                    <p class="text-base text-gray-600 mt-2">Talleres y charlas para quienes cuidan con amor.</p>
+                    <button type="button" class="freq-open-btn" data-freq-id="cuidadoras">Explorar frecuencia <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </article>
+                </div>
+                <div class="glow-frame w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-sm">
+                <article class="glow-frame-inner freq-panel freq-card p-8 rounded-3xl hover:shadow-lg transition-all border-l-4 border-sensori-cyan h-full" data-freq-id="cap">
+                    <div class="freq-card-fx freq-card-fx--cap" aria-hidden="true"><svg viewBox="0 0 100 80"><circle cx="50" cy="40" r="25" fill="none" stroke-width="1.5"/><circle cx="50" cy="40" r="15" fill="none" stroke-width="1"/></svg></div>
+                    <span class="text-base font-bold text-sensori-cyan uppercase tracking-wider">Comunidad</span>
+                    <h3 class="font-hand text-xl font-bold text-sensori-purpleDeep mt-1">Capacitación en Inclusión</h3>
+                    <p class="text-base text-gray-600 mt-2">Formación para educadores y vecinos de Padre Hurtado.</p>
+                    <button type="button" class="freq-open-btn" data-freq-id="cap">Explorar frecuencia <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </article>
+                </div>
+            </div>
+            </div>
+            <!-- ✦ Momento Relax 3 — esquina inferior derecha del recuadro -->
+            <div class="relax-trigger-wrap">
+                <div class="hero-relax-switch">
+                    <input type="checkbox" id="relax3-checkbox" class="relax-toggle-input" onchange="toggleBalloonGame()" aria-label="Iniciar juego pinchar globos">
+                    <label class="relax-toggle" for="relax3-checkbox">
+                        <span class="relax-toggle__circle"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CHARLAS -->
+        <section id="charlas" class="section-zone-2 py-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <canvas class="zone-particles-canvas" aria-hidden="true"></canvas>
+            <div class="max-w-6xl mx-auto zone-content">
+
+                <div class="max-w-3xl mx-auto text-center space-y-6 mb-14">
+                    <span class="freq-tag text-sensori-orangeDeep">Conocimiento que Empodera</span>
+                    <h2 class="text-3xl md:text-4xl font-hand font-bold text-sensori-purpleDeep">Charlas, Semanas de Inclusión y Divulgación</h2>
+                    <p class="text-gray-700 leading-relaxed text-base md:text-lg">
+                        Ofrecemos de manera periódica seminarios y conferencias abiertas en Padre Hurtado sobre accesibilidad digital, sensibilización, salud integrativa y apoyo metodológico para el cuidado. Buscamos erradicar mitos y equipar a la comunidad con estrategias prácticas de crianza, estimulación y resguardo familiar.
+                    </p>
+                </div>
+
+                <!-- Filtro SVG compartido por las 4 tarjetas-ticket (efecto holográfico) -->
+                <svg class="ticket-filter" aria-hidden="true">
+                    <filter id="bump">
+                        <feTurbulence result="noise" numOctaves="3" baseFrequency="0.7" type="fractalNoise"></feTurbulence>
+                        <feSpecularLighting in="noise" result="specular" lighting-color="#fffffc" specularExponent="25" specularConstant="0.8" surfaceScale="0.15">
+                            <fePointLight z="210" y="100" x="100"></fePointLight>
+                        </feSpecularLighting>
+                        <feComposite result="noise2" operator="in" in="specular" in2="SourceGraphic"></feComposite>
+                        <feBlend mode="screen" in2="noise2" in="SourceGraphic"></feBlend>
+                    </filter>
+                </svg>
+
+                <div class="max-w-5xl mx-auto space-y-6 mb-14">
+                    <h3 class="font-hand text-xl font-bold text-sensori-cyan mb-2 text-center">✦ Próximos Encuentros</h3>
+
+                    <!-- Tickets de Charlas (4) -->
+                    <div class="ticket-row">
+
+                        <!-- Ticket 1 -->
+                        <div class="ticket-card" role="button" tabindex="0" aria-label="Ver información: Navegación e Interfaces Sensoriales, 2 de Julio" onclick="openCharlaInfo(0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCharlaInfo(0);}">
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-header">CHARLA<div class="ticket-symbol">✁</div></div>
+                            <div class="ticket-body">
+                                <em>Interfaces Sensoriales</em><br>
+                                2 de Julio · 2026<br>
+                                Padre Hurtado, RM
+                            </div>
+                            <div class="ticket-footer">
+                                <div class="ticket-number">Entrada <span class="ticket-bold">Gratuita</span></div>
+                                <div class="ticket-barcode"></div>
+                            </div>
+                            <div class="ticket-bg ticket-holographic ticket-holo-1"></div>
+                        </div>
+
+                        <!-- Ticket 2 -->
+                        <div class="ticket-card" role="button" tabindex="0" aria-label="Ver información: El Poder del Silencio y la Vibración, 14 de Agosto" onclick="openCharlaInfo(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCharlaInfo(1);}">
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-header">CHARLA<div class="ticket-symbol">✁</div></div>
+                            <div class="ticket-body">
+                                <em>Silencio y Vibración</em><br>
+                                14 de Agosto · 2026<br>
+                                Padre Hurtado, RM
+                            </div>
+                            <div class="ticket-footer">
+                                <div class="ticket-number">Entrada <span class="ticket-bold">Gratuita</span></div>
+                                <div class="ticket-barcode"></div>
+                            </div>
+                            <div class="ticket-bg ticket-holographic ticket-holo-2"></div>
+                        </div>
+
+                        <!-- Ticket 3 -->
+                        <div class="ticket-card" role="button" tabindex="0" aria-label="Ver información: Prevención del Burnout del Cuidador, 5 de Septiembre" onclick="openCharlaInfo(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCharlaInfo(2);}">
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-header">CHARLA<div class="ticket-symbol">✁</div></div>
+                            <div class="ticket-body">
+                                <em>Burnout del Cuidador</em><br>
+                                5 de Septiembre · 2026<br>
+                                Padre Hurtado, RM
+                            </div>
+                            <div class="ticket-footer">
+                                <div class="ticket-number">Entrada <span class="ticket-bold">Gratuita</span></div>
+                                <div class="ticket-barcode"></div>
+                            </div>
+                            <div class="ticket-bg ticket-holographic ticket-holo-3"></div>
+                        </div>
+
+                        <!-- Ticket 4 -->
+                        <div class="ticket-card" role="button" tabindex="0" aria-label="Ver información: Semana de Inclusión y Accesibilidad Digital, Octubre" onclick="openCharlaInfo(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCharlaInfo(3);}">
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪</div>
+                            <div class="ticket-notes">♪♪♪♪♪</div>
+                            <div class="ticket-header">CHARLA<div class="ticket-symbol">✁</div></div>
+                            <div class="ticket-body">
+                                <em>Semana de Inclusión</em><br>
+                                Octubre · 2026<br>
+                                Padre Hurtado, RM
+                            </div>
+                            <div class="ticket-footer">
+                                <div class="ticket-number">Entrada <span class="ticket-bold">Gratuita</span></div>
+                                <div class="ticket-barcode"></div>
+                            </div>
+                            <div class="ticket-bg ticket-holographic ticket-holo-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="max-w-3xl mx-auto">
+                    <div class="charlas-comunidad-box p-5 bg-sensori-orange/10 rounded-2xl border-l-4 border-sensori-orange text-left relative">
+                        <h4 class="font-bold text-sensori-purpleDeep text-base mb-1">¿Representas a un colegio, club de adulto mayor o junta de vecinos?</h4>
+                        <p class="text-base text-gray-600 leading-relaxed">Puedes solicitar una charla comunitaria gratuita en tu barrio completando el formulario de contacto al final de esta página.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ✦ Momento Relax 4 — esquina inferior derecha del cuadro grande de Charlas -->
+            <div class="relax-trigger-wrap charlas-relax-corner">
+                <div class="hero-relax-switch">
+                    <input type="checkbox" id="relax4-checkbox" class="relax-toggle-input" onchange="toggleChase()" aria-label="Activar animación gato y ratón">
+                    <label class="relax-toggle" for="relax4-checkbox">
+                        <span class="relax-toggle__circle"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: TERAPIAS -->
+        <section id="terapias" class="section-zone-2 py-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <canvas class="zone-particles-canvas" aria-hidden="true"></canvas>
+            <div class="zone-content">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="freq-tag text-sensori-purpleDeep">Cuidado Individualizado</span>
+                <h2 class="text-3xl md:text-4xl font-hand font-bold text-sensori-greenDeep" data-i18n="sec_therapy_title">Experiencias Terapéuticas Sin Costo</h2>
+                <p class="text-gray-600 text-base md:text-lg" data-i18n="sec_therapy_desc">
+                    Nuestras terapias combinan calor humano y tecnología no invasiva. El acceso es gratuito para la comunidad.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="glow-frame">
+                <div class="glow-frame-inner bg-white/70 p-8 rounded-3xl border border-sensori-purple/10 shadow-md relative overflow-hidden flex flex-col h-full">
+                    <div class="space-y-4 flex-grow">
+                        <div class="w-12 h-12 bg-sensori-purple/10 rounded-2xl flex items-center justify-center text-sensori-purple">
+                            <i data-lucide="waves" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-hand font-bold text-sensori-purpleDeep">Vibroterapia Celular</h3>
+                        <p class="text-base text-gray-600 leading-relaxed">
+                            Sesiones de relajación profunda utilizando camillas táctiles especiales. Trasmitimos ondas suaves sinusoidales en rangos de 30 a 80 Hz que reducen la tensión y mejoran el descanso corporal de forma inmediata.
+                        </p>
+                    </div>
+                    <button onclick="openTherapyModal('vibro')" class="mt-4 w-full text-left text-base font-semibold text-sensori-purpleDeep hover:text-sensori-cyan flex items-center gap-2 group transition-colors focus:outline-none focus:ring-2 focus:ring-sensori-cyan rounded-lg py-2" aria-label="Seguir leyendo sobre Vibroterapia Celular">
+                        <span data-i18n="read_more">Seguir leyendo</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <div class="pt-4 border-t border-sensori-purple/10 mt-2 flex justify-between items-center">
+                        <span class="text-base font-semibold text-sensori-purple">20 a 30 mins / sesión</span>
+                        <a href="#contacto" class="text-base font-bold text-sensori-purpleDeep hover:underline">Consultar Horarios</a>
+                    </div>
+                </div>
+                </div>
+
+                <div class="glow-frame">
+                <div class="glow-frame-inner bg-white/70 p-8 rounded-3xl border border-sensori-cyan/10 shadow-md relative overflow-hidden flex flex-col h-full">
+                    <div class="space-y-4 flex-grow">
+                        <div class="w-12 h-12 bg-sensori-cyan/10 rounded-2xl flex items-center justify-center text-sensori-cyan">
+                            <i data-lucide="eye" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-hand font-bold text-sensori-purpleDeep">Estimulación Visual & Foco</h3>
+                        <p class="text-base text-gray-600 leading-relaxed">
+                            Inmersión controlada y suave para entrenar el foco cognitivo, la propiocepción y la creatividad espacial, adaptado a niños con autismo o personas con daño cerebral adquirido.
+                        </p>
+                    </div>
+                    <button onclick="openTherapyModal('visual')" class="mt-4 w-full text-left text-base font-semibold text-sensori-purpleDeep hover:text-sensori-cyan flex items-center gap-2 group transition-colors focus:outline-none focus:ring-2 focus:ring-sensori-cyan rounded-lg py-2" aria-label="Seguir leyendo sobre Estimulación Visual">
+                        <span data-i18n="read_more">Seguir leyendo</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <div class="pt-4 border-t border-sensori-cyan/10 mt-2 flex justify-between items-center">
+                        <span class="text-base font-semibold text-sensori-cyan">15 mins / sesión progresiva</span>
+                        <a href="#contacto" class="text-base font-bold text-sensori-purpleDeep hover:underline">Consultar Horarios</a>
+                    </div>
+                </div>
+                </div>
+
+                <div class="glow-frame">
+                <div class="glow-frame-inner bg-white/70 p-8 rounded-3xl border border-sensori-green/10 shadow-md relative overflow-hidden flex flex-col h-full">
+                    <div class="space-y-4 flex-grow">
+                        <div class="w-12 h-12 bg-sensori-green/10 rounded-2xl flex items-center justify-center text-sensori-green">
+                            <i data-lucide="music-4" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-hand font-bold text-sensori-purpleDeep">Jamming & Expresión Libre</h3>
+                        <p class="text-base text-gray-600 leading-relaxed">
+                            Utilización de instrumentos musicales tradicionales y de baja fricción física para estimular la coordinación motriz fina, permitiendo a los usuarios comunicarse y canalizar emociones mediante el arte vivo.
+                        </p>
+                    </div>
+                    <button onclick="openTherapyModal('jamming')" class="mt-4 w-full text-left text-base font-semibold text-sensori-purpleDeep hover:text-sensori-cyan flex items-center gap-2 group transition-colors focus:outline-none focus:ring-2 focus:ring-sensori-cyan rounded-lg py-2" aria-label="Seguir leyendo sobre Jamming">
+                        <span data-i18n="read_more">Seguir leyendo</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <div class="pt-4 border-t border-sensori-green/10 mt-2 flex justify-between items-center">
+                        <span class="text-base font-semibold text-sensori-green">45 mins / sesión colectiva</span>
+                        <a href="#contacto" class="text-base font-bold text-sensori-purpleDeep hover:underline">Consultar Horarios</a>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+            </div>
+            <!-- ✦ Momento Relax 5 — esquina inferior derecha del recuadro -->
+            <div class="relax-trigger-wrap">
+                <div class="hero-relax-switch">
+                    <input type="checkbox" id="relax5-checkbox" class="relax-toggle-input" onchange="toggleUnicorns()" aria-label="Activar nube con unicornios paracaidistas">
+                    <label class="relax-toggle" for="relax5-checkbox">
+                        <span class="relax-toggle__circle"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: CARTELERA -->
+        <section id="cartelera" class="section-zone-2 py-20 px-4 md:px-8 max-w-7xl mx-auto relative">
+            <canvas class="zone-particles-canvas" aria-hidden="true"></canvas>
+            <div class="zone-content">
+
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply overflow-hidden z-0">
+                <!-- Onda sinusoidal gigante decorativa -->
+                <svg class="absolute bottom-5 right-5 w-80 h-40 text-sensori-purple" viewBox="0 0 200 60" fill="none" aria-hidden="true">
+                    <path d="M0,30 Q20,5 40,30 T80,30 T120,30 T160,30 T200,30" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                    <path d="M0,30 Q20,55 40,30 T80,30 T120,30 T160,30 T200,30" stroke="currentColor" stroke-width="2.5" fill="none" opacity="0.5"/>
+                </svg>
+                <svg class="absolute top-5 left-5 w-60 h-60 text-sensori-cyan fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="30" />
+                    <circle cx="30" cy="30" r="15" />
+                    <circle cx="70" cy="30" r="15" />
+                    <circle cx="50" cy="70" r="15" />
+                </svg>
+            </div>
+
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                    <span class="freq-tag text-sensori-tealDeep">Comunidad Conectada</span>
+                    <h2 class="text-3xl md:text-4xl font-hand font-bold text-sensori-purpleDeep">Cartelera de Avisos y Contactos Útiles</h2>
+                    <p class="text-gray-600 text-base md:text-lg">
+                        Nuestra pizarra interactiva de la comunidad. Aquí puedes consultar los teléfonos de emergencia comunales, solicitar ayuda o avisar de un evento. ¡Tú también puedes dejar un mensaje!
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8">
+
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-[#F3EDE0] p-6 rounded-2xl border-2 border-sensori-teal/25 shadow-md space-y-4">
+                            <h3 class="font-hand text-lg font-bold text-sensori-purpleDeep flex items-center gap-2">
+                                <i data-lucide="pin" class="w-6 h-6 text-sensori-orange"></i>
+                                Filtrar Cartelera
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="filterNotices('all')" id="filter-btn-all" class="px-4 py-2 text-base font-bold bg-sensori-teal text-white rounded-lg transition-all focus:ring-2 focus:ring-sensori-teal">Todos</button>
+                                <button onclick="filterNotices('comunidad')" id="filter-btn-comunidad" class="px-4 py-2 text-base font-bold bg-white text-sensori-charcoal border border-gray-300 rounded-lg hover:bg-sensori-teal/10 transition-all">Avisos Vecinales</button>
+                                <button onclick="filterNotices('emergencia')" id="filter-btn-emergencia" class="px-4 py-2 text-base font-bold bg-white text-sensori-charcoal border border-gray-300 rounded-lg hover:bg-sensori-teal/10 transition-all">Emergencia & Salud</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F3EDE0] p-6 rounded-2xl border-2 border-sensori-green/25 shadow-md space-y-4">
+                            <h3 class="font-hand text-lg font-bold text-sensori-purpleDeep flex items-center gap-2">
+                                <i data-lucide="edit-3" class="w-6 h-6 text-sensori-green"></i>
+                                Escribir en la Pizarra
+                            </h3>
+                            <form id="notice-form" onsubmit="addCustomNotice(event)" class="space-y-3">
+                                <div>
+                                    <label for="notice-author" class="block text-base font-bold text-gray-700 mb-1">Tu Nombre o Organización</label>
+                                    <input type="text" id="notice-author" required placeholder="Ej: Vecina Carmen Soto" class="input w-full text-base">
+                                </div>
+                                <div>
+                                    <label for="notice-type" class="block text-base font-bold text-gray-700 mb-1">Categoría</label>
+                                    <select id="notice-type" class="input w-full text-base">
+                                        <option value="comunidad">Aviso Vecinal</option>
+                                        <option value="emergencia">Soporte o Emergencia</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="notice-text" class="block text-base font-bold text-gray-700 mb-1">Mensaje Corto</label>
+                                    <textarea id="notice-text" required rows="3" maxlength="150" placeholder="Ej: Busco taller de bordado adaptado en Padre Hurtado..." class="input w-full text-base"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-sensori-green text-white py-3 rounded-xl font-bold hover:bg-sensori-purple transition-colors text-base flex items-center justify-center gap-2" min-width="48">
+                                    <i data-lucide="send" class="w-5 h-5"></i>
+                                    <span>Colgar en la Pizarra</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8">
+                        <div class="grid sm:grid-cols-2 gap-6" id="notices-container">
+                            <!-- Injected by JavaScript on load -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            <!-- ✦ Momento Relax 6 — esquina inferior derecha del recuadro -->
+            <div class="relax-trigger-wrap">
+                <div class="hero-relax-switch">
+                    <input type="checkbox" id="relax6-checkbox" class="relax-toggle-input" onchange="toggleBubbleWrap()" aria-label="Activar nylon de burbujas">
+                    <label class="relax-toggle" for="relax6-checkbox">
+                        <span class="relax-toggle__circle"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: CONTACTO -->
+        <section id="contacto" class="section-zone-2 py-20 px-4 md:px-8 max-w-5xl mx-auto relative z-10">
+            <canvas class="zone-particles-canvas" aria-hidden="true"></canvas>
+            <div class="zone-content freq-panel p-8 md:p-12 rounded-3xl border-2 border-sensori-purple/25 shadow-2xl relative overflow-hidden">
+                <div class="wave-ring bg-sensori-cyan w-48 h-48 bottom-[-40px] right-[-40px]"></div>
+
+                <div class="grid md:grid-cols-12 gap-10">
+
+                    <div class="md:col-span-5 space-y-6">
+                        <span class="freq-tag text-sensori-purpleDeep">Forma parte</span>
+                        <h2 class="text-3xl font-hand font-bold text-sensori-purpleDeep">Conectémonos con Ternura</h2>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            ¿Tienes dudas sobre los horarios? ¿Quieres inscribir a tu familiar o ser voluntario en nuestras actividades en **Padre Hurtado**? Escríbenos con toda confianza. Respondemos con mucho amor.
+                        </p>
+
+                        <div class="space-y-4 pt-4 text-base text-gray-600">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sensori-green/10 flex items-center justify-center text-sensori-green flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <span>Padre Hurtado, Región Metropolitana (Chile)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sensori-cyan/10 flex items-center justify-center text-sensori-cyan flex-shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <span>contacto@sensoriarte.cl</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sensori-coral/10 flex items-center justify-center text-sensori-coral flex-shrink-0">
+                                    <i data-lucide="heart" class="w-6 h-6"></i>
+                                </div>
+                                <span>Talleres 100% gratuitos para la comunidad</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-7">
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contact-name" class="block text-base font-bold text-gray-700 mb-1">Nombre Completo</label>
+                                    <input type="text" id="contact-name" required placeholder="Ej: Marcela Paz" class="input w-full text-base">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-base font-bold text-gray-700 mb-1">Email de Contacto</label>
+                                    <input type="email" id="contact-email" required placeholder="ejemplo@correo.com" class="input w-full text-base">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contact-phone" class="block text-base font-bold text-gray-700 mb-1">Teléfono o WhatsApp</label>
+                                <input type="tel" id="contact-phone" required placeholder="Ej: +56 9 1234 5678" class="input w-full text-base">
+                            </div>
+                            <div>
+                                <label for="contact-role" class="block text-base font-bold text-gray-700 mb-1">¿Cómo te gustaría participar?</label>
+                                <select id="contact-role" class="input w-full text-base" onchange="handleRoleChange(this.value)" style="color:#888;">
+                                    <option value="" disabled selected style="color:#aaa;">— Selecciona el tema que te interesa aquí —</option>
+                                    <option value="beneficiario" style="color:#333;">Quiero asistir a las Terapias/Talleres</option>
+                                    <option value="cuidador" style="color:#333;">Soy Cuidadora/Familia de un usuario</option>
+                                    <option value="voluntario" style="color:#333;">Deseo ser Voluntario</option>
+                                    <option value="charla" style="color:#333;">Quiero coordinar una Charla Comunitaria</option>
+                                    <option value="otro" style="color:#333;">Otras consultas</option>
+                                </select>
+
+                                <!-- Chip: charla seleccionada (aparece tras elegir en el modal) -->
+                                <div class="charla-chip" id="charla-chip">
+                                    <div class="charla-chip-thumb" id="charla-chip-thumb"></div>
+                                    <div class="charla-chip-info">
+                                        <div class="charla-chip-name" id="charla-chip-name"></div>
+                                        <div class="charla-chip-date" id="charla-chip-date"></div>
+                                    </div>
+                                    <button class="charla-chip-change" onclick="openCharlaModal()" aria-label="Cambiar charla">Cambiar</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contact-msg" class="block text-base font-bold text-gray-700 mb-1">Cuéntanos un poquito de ti o tu familiar</label>
+                                <textarea id="contact-msg" rows="4" required placeholder="Comparte tus inquietudes o cuéntanos qué taller te interesa..." class="input w-full text-base"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-sensori-purpleDeep text-white py-4 rounded-full font-bold hover:bg-sensori-cyan transition-all text-base shadow-md flex items-center justify-center gap-2" min-width="48">
+                                <i data-lucide="check" class="w-6 h-6"></i>
+                                <span>Enviar Mensaje con Cariño</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- ✦ Experiencia 8 — interruptor de activar/desactivar -->
+                <div class="relax-trigger-wrap">
+                    <div class="hero-relax-switch">
+                        <input type="checkbox" id="exp8-checkbox" class="relax-toggle-input" onchange="toggleKittens()" aria-label="Activar gatitos voladores">
+                        <label class="relax-toggle" for="exp8-checkbox">
+                            <span class="relax-toggle__circle"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Overlay emotivo (estado triste) — se mantiene oculto; la cajita unificada cubre este flujo -->
+    <div class="mood-overlay" id="mood-sad-overlay" role="dialog" aria-modal="true" aria-labelledby="mood-sad-title" hidden>
+        <div class="mood-overlay-card">
+            <h3 id="mood-sad-title">Tu tristeza también merece espacio</h3>
+            <p>Lo que sientes es válido. No tienes que apresurarte a «estar bien».</p>
+        </div>
+    </div>
+
+    <!-- Ventana de chistes -->
+    <div class="joke-modal" id="joke-modal" role="dialog" aria-modal="true" aria-labelledby="joke-text" hidden>
+        <div class="joke-modal-card">
+            <p id="joke-text"></p>
+            <div class="joke-modal-actions">
+                <button type="button" class="joke-btn" id="joke-another">Otro</button>
+                <button type="button" class="joke-btn joke-btn--alt" id="joke-done">Ya me reí, volvamos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal mensajes emoción (feliz / neutro) -->
+    <div class="mood-msg-modal" id="mood-msg-modal" role="dialog" aria-modal="true" hidden>
+        <div class="mood-msg-card" id="mood-msg-card">
+            <div class="mood-msg-body text">
+                <h3 id="mood-msg-title"></h3>
+                <p id="mood-msg-text"></p>
+                <div class="mood-msg-extra" id="mood-msg-extra" hidden>
+                    <button type="button" class="mood-msg-close" id="mood-sad-home">Volver al inicio</button>
+                    <button type="button" class="mood-msg-close" id="mood-sad-joke">¿Nos reímos un poco?</button>
+                </div>
+                <button type="button" class="mood-msg-close" id="mood-msg-close">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal explorar frecuencia -->
+    <div class="freq-explore-modal" id="freq-explore-modal" role="dialog" aria-modal="true" hidden>
+        <div class="freq-explore-card" id="freq-explore-card">
+            <div class="freq-explore-fx" id="freq-explore-fx" aria-hidden="true"></div>
+            <button type="button" class="piano-modal-close absolute top-3 right-3" id="freq-explore-close" aria-label="Cerrar">×</button>
+            <div id="freq-explore-body" class="relative z-10 space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- Botones flotantes de instrumentos -->
+    <button type="button" class="music-float-btn music-float-btn--piano" id="piano-float-btn" aria-label="Abrir piano" title="Piano">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="10" width="18" height="10" rx="1.5"/><path d="M5 10V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/><line x1="7" y1="14" x2="7" y2="17"/><line x1="10" y1="14" x2="10" y2="17"/><line x1="14" y1="14" x2="14" y2="17"/><line x1="17" y1="14" x2="17" y2="17"/></svg>
+    </button>
+    <button type="button" class="music-float-btn music-float-btn--guitar" id="guitar-float-btn" aria-label="Abrir guitarra" title="Guitarra">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M11.5 3l1 2 2 1-1 3 3 1-2 8a3 3 0 0 1-5.2 0l-2-8 3-1-1-3 2-1-1-2z"/><circle cx="12" cy="17" r="2.5"/></svg>
+    </button>
+    <button type="button" class="music-float-btn music-float-btn--sax" id="sax-float-btn" aria-label="Abrir saxofón" title="Saxofón">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 4v12c0 2 1.5 4 4 4s4-2 4-4V8"/><circle cx="16" cy="6" r="1.2" fill="currentColor"/><circle cx="17" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="14" r="1" fill="currentColor"/></svg>
+    </button>
+    <button type="button" class="music-float-btn music-float-btn--harp" id="harp-float-btn" aria-label="Abrir arpa" title="Arpa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4c0 14 2 16 6 16s6-2 6-16"/><line x1="8" y1="6" x2="8" y2="18"/><line x1="11" y1="5" x2="11" y2="19"/><line x1="14" y1="5" x2="14" y2="19"/><line x1="17" y1="6" x2="17" y2="18"/></svg>
+    </button>
+    <button type="button" class="music-float-btn music-float-btn--orchestra" id="orchestra-float-btn" aria-label="Abrir orquesta" title="Orquesta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><ellipse cx="12" cy="14" rx="8" ry="3"/><path d="M6 14V8M9 14V7M12 14V6M15 14V7M18 14V8"/><path d="M4 18h16"/></svg>
+    </button>
+
+    <!-- Modal piano -->
+    <div class="piano-modal" id="piano-modal" role="dialog" aria-modal="true" aria-labelledby="piano-modal-title" hidden>
+        <div class="piano-modal-backdrop" id="piano-modal-backdrop"></div>
+        <div class="piano-modal-card">
+            <div class="piano-modal-header">
+                <div>
+                    <h2 class="piano-modal-title" id="piano-modal-title">Espacio de relajación</h2>
+                    <p class="piano-modal-sub">Piano de concierto · 2 octavas · toca y deja volar las esporas</p>
+                </div>
+                <button type="button" class="piano-modal-close" id="piano-modal-close" aria-label="Cerrar piano">×</button>
+            </div>
+            <div class="vintage-piano" id="vintage-piano" role="application" aria-label="Piano de dos octavas">
+                <div class="piano-keys" id="piano-keys">
+                    <button type="button" class="piano-key-white" data-note="C4" data-freq="261.63" aria-label="Do"></button>
+                    <button type="button" class="piano-key-white" data-note="D4" data-freq="293.66" aria-label="Re"></button>
+                    <button type="button" class="piano-key-white" data-note="E4" data-freq="329.63" aria-label="Mi"></button>
+                    <button type="button" class="piano-key-white" data-note="F4" data-freq="349.23" aria-label="Fa"></button>
+                    <button type="button" class="piano-key-white" data-note="G4" data-freq="392" aria-label="Sol"></button>
+                    <button type="button" class="piano-key-white" data-note="A4" data-freq="440" aria-label="La"></button>
+                    <button type="button" class="piano-key-white" data-note="B4" data-freq="493.88" aria-label="Si"></button>
+                    <button type="button" class="piano-key-white" data-note="C5" data-freq="523.25" aria-label="Do"></button>
+                    <button type="button" class="piano-key-white" data-note="D5" data-freq="587.33" aria-label="Re"></button>
+                    <button type="button" class="piano-key-white" data-note="E5" data-freq="659.25" aria-label="Mi"></button>
+                    <button type="button" class="piano-key-white" data-note="F5" data-freq="698.46" aria-label="Fa"></button>
+                    <button type="button" class="piano-key-white" data-note="G5" data-freq="783.99" aria-label="Sol"></button>
+                    <button type="button" class="piano-key-white" data-note="A5" data-freq="880" aria-label="La"></button>
+                    <button type="button" class="piano-key-white" data-note="B5" data-freq="987.77" aria-label="Si"></button>
+                </div>
+                <div class="piano-legs" aria-hidden="true"><span class="piano-leg"></span><span class="piano-leg"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal guitarra -->
+    <div class="piano-modal" id="guitar-modal" role="dialog" aria-modal="true" hidden>
+        <div class="piano-modal-backdrop" data-close-modal="guitar-modal"></div>
+        <div class="piano-modal-card">
+            <div class="piano-modal-header">
+                <div><h2 class="piano-modal-title">Guitarra</h2><p class="piano-modal-sub">Pulsa una cuerda para escucharla</p></div>
+                <button type="button" class="piano-modal-close" data-close-modal="guitar-modal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="guitar-neck" id="guitar-strings"></div>
+        </div>
+    </div>
+
+    <!-- Modal saxofón -->
+    <div class="piano-modal" id="sax-modal" role="dialog" aria-modal="true" hidden>
+        <div class="piano-modal-backdrop" data-close-modal="sax-modal"></div>
+        <div class="piano-modal-card">
+            <div class="piano-modal-header">
+                <div><h2 class="piano-modal-title">Saxofón</h2><p class="piano-modal-sub">Toca las llaves — cada una es una nota</p></div>
+                <button type="button" class="piano-modal-close" data-close-modal="sax-modal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="sax-instrument" id="sax-instrument" aria-label="Saxofón interactivo">
+                <svg class="sax-svg" viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Saxofón">
+                    <defs>
+                        <linearGradient id="sax-gold" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFE9A0"/>
+                            <stop offset="40%" stop-color="#E8B84A"/>
+                            <stop offset="100%" stop-color="#C47820"/>
+                        </linearGradient>
+                        <linearGradient id="sax-gold-body" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#FFF0B8"/>
+                            <stop offset="55%" stop-color="#E0A83A"/>
+                            <stop offset="100%" stop-color="#A86818"/>
+                        </linearGradient>
+                        <linearGradient id="sax-bell-in" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFF6D0"/>
+                            <stop offset="100%" stop-color="#C9A050"/>
+                        </linearGradient>
+                        <filter id="sax-shadow" x="-10%" y="-5%" width="120%" height="115%">
+                            <feDropShadow dx="2" dy="6" stdDeviation="4" flood-color="#8B5A20" flood-opacity="0.25"/>
+                        </filter>
+                    </defs>
+
+                    <g filter="url(#sax-shadow)">
+                        <!-- Campana (bell) — flare a la derecha -->
+                        <path fill="url(#sax-gold)" stroke="#B86518" stroke-width="1.2" stroke-linejoin="round"
+                            d="M118 168
+                               C148 155 178 148 198 158
+                               C212 168 214 188 204 202
+                               C190 220 158 228 128 218
+                               C122 216 118 210 118 204 Z"/>
+                        <!-- Interior de la campana -->
+                        <ellipse cx="175" cy="182" rx="28" ry="22" fill="url(#sax-bell-in)" stroke="#B86518" stroke-width="1" transform="rotate(-18 175 182)"/>
+                        <ellipse cx="178" cy="180" rx="14" ry="11" fill="#8B5A20" opacity="0.35" transform="rotate(-18 178 180)"/>
+
+                        <!-- Arco inferior (bow / U) + tubo hacia la campana -->
+                        <path fill="url(#sax-gold)" stroke="#B86518" stroke-width="1.3" stroke-linejoin="round"
+                            d="M72 210
+                               C72 268 118 292 158 268
+                               C178 256 172 230 152 222
+                               L148 210
+                               C140 228 110 236 92 220
+                               C88 216 84 212 78 212
+                               C74 212 72 210 72 210 Z"/>
+                        <path fill="url(#sax-gold)" stroke="#B86518" stroke-width="1.2"
+                            d="M148 208
+                               C162 200 168 185 162 172
+                               L128 178
+                               C132 192 138 202 148 208 Z"/>
+                        <!-- Highlight del arco -->
+                        <path fill="none" stroke="#FFF0B8" stroke-width="3" stroke-linecap="round" opacity="0.45"
+                            d="M80 220 C88 258 128 278 152 255"/>
+
+                        <!-- Cuerpo principal (tubo vertical) -->
+                        <path fill="url(#sax-gold-body)" stroke="#B86518" stroke-width="1.3" stroke-linejoin="round"
+                            d="M58 78
+                               L92 78
+                               L98 218
+                               C98 230 90 238 78 238
+                               C66 238 58 230 58 218 Z"/>
+                        <!-- Highlight cuerpo -->
+                        <path fill="none" stroke="#FFF6D0" stroke-width="4" stroke-linecap="round" opacity="0.5"
+                            d="M66 90 L70 210"/>
+
+                        <!-- Mecánica / varillas (izquierda del cuerpo) -->
+                        <g stroke="#C47820" stroke-width="1.6" stroke-linecap="round" opacity="0.85">
+                            <line x1="48" y1="95" x2="48" y2="200"/>
+                            <line x1="42" y1="100" x2="42" y2="195"/>
+                            <line x1="36" y1="108" x2="36" y2="188"/>
+                            <line x1="36" y1="120" x2="58" y2="120"/>
+                            <line x1="36" y1="145" x2="58" y2="145"/>
+                            <line x1="36" y1="170" x2="58" y2="170"/>
+                        </g>
+                        <circle cx="42" cy="120" r="3.5" fill="#D4C4A8" stroke="#8B7355" stroke-width="0.8"/>
+                        <circle cx="42" cy="145" r="3.5" fill="#D4C4A8" stroke="#8B7355" stroke-width="0.8"/>
+                        <circle cx="42" cy="170" r="3.5" fill="#D4C4A8" stroke="#8B7355" stroke-width="0.8"/>
+
+                        <!-- Cuello curvo -->
+                        <path fill="url(#sax-gold)" stroke="#B86518" stroke-width="1.3" stroke-linejoin="round"
+                            d="M62 78
+                               C48 78 38 62 42 48
+                               C46 34 62 28 74 34
+                               C82 38 86 48 84 56
+                               L92 78 Z"/>
+                        <path fill="none" stroke="#FFF0B8" stroke-width="2.5" stroke-linecap="round" opacity="0.45"
+                            d="M56 72 C48 62 50 44 64 38"/>
+                        <!-- Llaves del cuello (decorativas) -->
+                        <circle cx="58" cy="48" r="4" fill="#E8D4B8" stroke="#8B7355" stroke-width="0.9"/>
+                        <circle cx="70" cy="42" r="3.5" fill="#E8D4B8" stroke="#8B7355" stroke-width="0.9"/>
+
+                        <!-- Boquilla -->
+                        <rect x="68" y="18" width="14" height="22" rx="2" fill="#3A3028"/>
+                        <rect x="70" y="36" width="10" height="8" rx="1" fill="#8B6914"/>
+                        <path fill="#1A1410" d="M70 18 L80 18 L78 10 L72 10 Z"/>
+                    </g>
+
+                    <!-- Llaves tocables -->
+                    <g id="sax-keys" class="sax-keys-svg">
+                        <g class="sax-key-group" data-note="0" transform="translate(75 100)">
+                            <circle class="sax-key-pad" r="11" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Do</text>
+                        </g>
+                        <g class="sax-key-group" data-note="1" transform="translate(76 128)">
+                            <circle class="sax-key-pad" r="11" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Re</text>
+                        </g>
+                        <g class="sax-key-group" data-note="2" transform="translate(77 156)">
+                            <circle class="sax-key-pad" r="11" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Mi</text>
+                        </g>
+                        <g class="sax-key-group" data-note="3" transform="translate(78 184)">
+                            <circle class="sax-key-pad" r="12" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Fa</text>
+                        </g>
+                        <g class="sax-key-group" data-note="4" transform="translate(88 225)">
+                            <circle class="sax-key-pad" r="12" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Sol</text>
+                        </g>
+                        <g class="sax-key-group" data-note="5" transform="translate(118 248)">
+                            <circle class="sax-key-pad" r="12" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">La</text>
+                        </g>
+                        <g class="sax-key-group" data-note="6" transform="translate(148 242)">
+                            <circle class="sax-key-pad" r="11" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Si</text>
+                        </g>
+                        <g class="sax-key-group" data-note="7" transform="translate(155 195)">
+                            <circle class="sax-key-pad" r="11" cx="0" cy="0"/>
+                            <text class="sax-key-label" x="0" y="4">Do</text>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal arpa -->
+    <div class="piano-modal" id="harp-modal" role="dialog" aria-modal="true" hidden>
+        <div class="piano-modal-backdrop" data-close-modal="harp-modal"></div>
+        <div class="piano-modal-card">
+            <div class="piano-modal-header">
+                <div><h2 class="piano-modal-title">Arpa</h2><p class="piano-modal-sub">Toca las cuerdas — cada una es una nota suave</p></div>
+                <button type="button" class="piano-modal-close" data-close-modal="harp-modal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="harp-instrument" id="harp-instrument" aria-label="Arpa interactiva">
+                <!-- Como el ejemplo: columna izq. + cuello curvo + caja diagonal + cuerdas -->
+                <svg class="harp-svg" viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arpa">
+                    <defs>
+                        <linearGradient id="harp-gold" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FFE9A8"/>
+                            <stop offset="45%" stop-color="#F0BF55"/>
+                            <stop offset="100%" stop-color="#C47820"/>
+                        </linearGradient>
+                        <linearGradient id="harp-gold-deep" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#F5D076"/>
+                            <stop offset="100%" stop-color="#B86518"/>
+                        </linearGradient>
+                        <filter id="harp-shadow" x="-12%" y="-6%" width="124%" height="118%">
+                            <feDropShadow dx="1" dy="8" stdDeviation="5" flood-color="#8B5A20" flood-opacity="0.28"/>
+                        </filter>
+                    </defs>
+
+                    <g filter="url(#harp-shadow)">
+                        <!-- Base / pedestal -->
+                        <ellipse cx="95" cy="278" rx="58" ry="12" fill="#C47820"/>
+                        <ellipse cx="95" cy="272" rx="52" ry="9" fill="url(#harp-gold)"/>
+
+                        <!-- Columna izquierda -->
+                        <rect x="48" y="58" width="22" height="214" rx="8" fill="url(#harp-gold)" stroke="#B86518" stroke-width="1.4"/>
+                        <line x1="54" y1="70" x2="54" y2="250" stroke="#FFE9A8" stroke-width="1.2" opacity="0.55"/>
+                        <line x1="64" y1="70" x2="64" y2="250" stroke="#C47820" stroke-width="1" opacity="0.35"/>
+
+                        <!-- Voluta / espiral superior -->
+                        <path fill="url(#harp-gold)" stroke="#B86518" stroke-width="1.4"
+                            d="M42 58
+                               C38 42 48 28 62 30
+                               C78 32 88 48 82 62
+                               C78 72 66 76 58 70
+                               C52 66 48 62 48 58
+                               Z"/>
+                        <circle cx="62" cy="48" r="7" fill="#FFE9A8" stroke="#B86518" stroke-width="1.2"/>
+                        <circle cx="62" cy="48" r="2.8" fill="#C47820"/>
+
+                        <!-- Cuello curvo (S) -->
+                        <path fill="url(#harp-gold)" stroke="#B86518" stroke-width="1.5" stroke-linejoin="round"
+                            d="M78 52
+                               C110 38 150 48 178 72
+                               C192 82 204 88 214 82
+                               C220 78 222 70 216 64
+                               C200 72 186 66 172 56
+                               C148 40 112 28 82 42
+                               C78 44 76 48 78 52 Z"/>
+                        <!-- Remate derecho del cuello -->
+                        <circle cx="214" cy="72" r="10" fill="url(#harp-gold)" stroke="#B86518" stroke-width="1.4"/>
+                        <circle cx="214" cy="72" r="3.5" fill="#FFE9A8"/>
+
+                        <!-- Caja diagonal (hipotenusa) -->
+                        <path fill="url(#harp-gold)" stroke="#B86518" stroke-width="1.6" stroke-linejoin="round"
+                            d="M70 262
+                               L200 88
+                               L218 96
+                               L92 274
+                               Z"/>
+                        <path fill="none" stroke="#FFE9A8" stroke-width="1.4" opacity="0.45"
+                            d="M78 258 L198 96"/>
+                    </g>
+
+                    <!-- Cuerdas (visibles en HTML; no dependen de JS) -->
+                    <g id="harp-strings" fill="none" stroke-linecap="round">
+                        <g class="harp-string-group" data-note="0">
+                            <line class="harp-hit" x1="78" y1="68" x2="78" y2="251" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="78" y1="68" x2="78" y2="251" stroke="#E8C878" stroke-width="1.9"/>
+                        </g>
+                        <g class="harp-string-group" data-note="1">
+                            <line class="harp-hit" x1="90" y1="64" x2="90" y2="235" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="90" y1="64" x2="90" y2="235" stroke="#E8C878" stroke-width="1.8"/>
+                        </g>
+                        <g class="harp-string-group" data-note="2">
+                            <line class="harp-hit" x1="102" y1="62" x2="102" y2="219" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="102" y1="62" x2="102" y2="219" stroke="#E8C878" stroke-width="1.7"/>
+                        </g>
+                        <g class="harp-string-group" data-note="3">
+                            <line class="harp-hit" x1="114" y1="60" x2="114" y2="203" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="114" y1="60" x2="114" y2="203" stroke="#E8C878" stroke-width="1.65"/>
+                        </g>
+                        <g class="harp-string-group" data-note="4">
+                            <line class="harp-hit" x1="126" y1="58" x2="126" y2="187" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="126" y1="58" x2="126" y2="187" stroke="#E8C878" stroke-width="1.6"/>
+                        </g>
+                        <g class="harp-string-group" data-note="5">
+                            <line class="harp-hit" x1="138" y1="58" x2="138" y2="171" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="138" y1="58" x2="138" y2="171" stroke="#E8C878" stroke-width="1.55"/>
+                        </g>
+                        <g class="harp-string-group" data-note="6">
+                            <line class="harp-hit" x1="150" y1="60" x2="150" y2="155" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="150" y1="60" x2="150" y2="155" stroke="#E8C878" stroke-width="1.5"/>
+                        </g>
+                        <g class="harp-string-group" data-note="7">
+                            <line class="harp-hit" x1="162" y1="64" x2="162" y2="139" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="162" y1="64" x2="162" y2="139" stroke="#E8C878" stroke-width="1.45"/>
+                        </g>
+                        <g class="harp-string-group" data-note="8">
+                            <line class="harp-hit" x1="174" y1="68" x2="174" y2="123" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="174" y1="68" x2="174" y2="123" stroke="#E8C878" stroke-width="1.4"/>
+                        </g>
+                        <g class="harp-string-group" data-note="9">
+                            <line class="harp-hit" x1="186" y1="74" x2="186" y2="107" stroke="transparent" stroke-width="12"/>
+                            <line class="harp-string" x1="186" y1="74" x2="186" y2="107" stroke="#E8C878" stroke-width="1.35"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal orquesta -->
+    <div class="piano-modal" id="orchestra-modal" role="dialog" aria-modal="true" hidden>
+        <div class="piano-modal-backdrop" data-close-modal="orchestra-modal"></div>
+        <div class="piano-modal-card">
+            <div class="piano-modal-header">
+                <div><h2 class="piano-modal-title">Orquesta</h2><p class="piano-modal-sub">Melodía inspirada en Nothing Else Matters</p></div>
+                <button type="button" class="piano-modal-close" data-close-modal="orchestra-modal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="orchestra-stage" id="orchestra-stage">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="10" width="18" height="8" rx="1"/><line x1="7" y1="14" x2="7" y2="16"/><line x1="12" y1="14" x2="12" y2="16"/><line x1="17" y1="14" x2="17" y2="16"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 3l1 2 2 1-1 2 2 1-1 7a2.5 2.5 0 0 1-4 0l-1-7 2-1-1-2 1-2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 4v12c0 2 1.5 3.5 4 3.5"/><circle cx="15" cy="7" r="1" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 4c0 12 2 14 6 14s6-2 6-14"/><line x1="9" y1="6" x2="9" y2="17"/><line x1="12" y1="5" x2="12" y2="18"/><line x1="15" y1="6" x2="15" y2="17"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="12" cy="14" rx="7" ry="2.5"/><path d="M7 14V9M10 14V8M13 14V7M16 14V8M17 14V9"/></svg>
+            </div>
+            <p class="text-center text-base text-gray-600 font-hand mt-2" id="orchestra-status">Reproduciendo…</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-sensori-greenDeep text-white py-12 px-6 border-t-4 border-sensori-mustard relative z-10" role="contentinfo">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="logo-puro-wrap footer-logo-wrap">
+                    <img src="img/LogoSensoriarte.png" alt="Logo SensoriArte" onerror="this.src='https://placehold.co/100x100/F5F5F5/1E88E5?text=SA'">
+                </div>
+                <div>
+                    <h3 class="font-hand text-lg font-bold text-sensori-leaf">SensoriArte</h3>
+                    <p class="text-base text-gray-300" data-i18n="footer_tagline">Arte terapéutico e inclusivo para el florecimiento humano.</p>
+                </div>
+            </div>
+            <div class="text-center md:text-right space-y-1">
+                <p class="text-base text-gray-300">© 2026 Agrupación Sin Fines de Lucro **SensoriArte**.</p>
+                <p class="text-sm text-gray-400">Desarrollado con altos estándares de accesibilidad universal e inclusión (WCAG 2.1).</p>
+                <p class="text-sm text-sensori-cyanSoft">Padre Hurtado, Región Metropolitana, Chile.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ MOMENTO RELAX 2 — TRES EN RAYA ═══ -->
+    <div class="ttt-modal-overlay" id="ttt-overlay" role="dialog" aria-modal="true" aria-label="Tres en raya">
+        <div class="ttt-box">
+            <div class="ttt-title">⚔️ Tres en Raya</div>
+            <div class="ttt-score">
+                <div class="ttt-score-item">
+                    <div class="ttt-score-val" id="ttt-score-p">0</div>
+                    <div class="ttt-score-label">Tú (✕)</div>
+                </div>
+                <div class="ttt-score-item">
+                    <div class="ttt-score-val" id="ttt-score-d">0</div>
+                    <div class="ttt-score-label">Empates</div>
+                </div>
+                <div class="ttt-score-item">
+                    <div class="ttt-score-val" id="ttt-score-m">0</div>
+                    <div class="ttt-score-label">Máquina (○)</div>
+                </div>
+            </div>
+            <div class="ttt-status" id="ttt-status">Tu turno — coloca una ✕</div>
+            <div class="ttt-board" id="ttt-board">
+                <div class="ttt-cell" data-i="0" onclick="tttMove(0)"></div>
+                <div class="ttt-cell" data-i="1" onclick="tttMove(1)"></div>
+                <div class="ttt-cell" data-i="2" onclick="tttMove(2)"></div>
+                <div class="ttt-cell" data-i="3" onclick="tttMove(3)"></div>
+                <div class="ttt-cell" data-i="4" onclick="tttMove(4)"></div>
+                <div class="ttt-cell" data-i="5" onclick="tttMove(5)"></div>
+                <div class="ttt-cell" data-i="6" onclick="tttMove(6)"></div>
+                <div class="ttt-cell" data-i="7" onclick="tttMove(7)"></div>
+                <div class="ttt-cell" data-i="8" onclick="tttMove(8)"></div>
+            </div>
+            <div class="ttt-actions">
+                <button class="ttt-btn ttt-btn--restart" onclick="tttRestart()">↺ Nueva partida</button>
+                <button class="ttt-btn ttt-btn--close"   onclick="closeTTT()">✕ Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ EXPERIENCIA 8 — GATITOS VOLADORES ═══ -->
+    <div class="kittens-overlay" id="kittens-overlay" aria-hidden="true">
+        <canvas id="kittens-canvas"></canvas>
+        <button class="kittens-stop-btn" onclick="document.getElementById('exp8-checkbox').checked=false; toggleKittens();">✕ Detener</button>
+    </div>
+
+    <!-- ═══ MOMENTO RELAX 6 — NYLON DE BURBUJAS ═══ -->
+    <div class="bwrap-overlay" id="bwrap-overlay" aria-hidden="true">
+        <canvas id="bwrap-canvas"></canvas>
+        <div class="bwrap-ui">
+            <div class="bwrap-counter" id="bwrap-counter">0 burbujas reventadas 🫧</div>
+            <button class="bwrap-stop-btn" onclick="document.getElementById('relax6-checkbox').checked=false; toggleBubbleWrap();">✕ Detener experiencia</button>
+        </div>
+    </div>
+
+    <!-- ═══ MOMENTO RELAX 5 — NUBE CON UNICORNIOS ═══ -->
+    <div class="relax5-overlay" id="relax5-overlay" aria-hidden="true">
+        <canvas id="relax5-canvas"></canvas>
+        <button class="relax5-stop-btn" onclick="document.getElementById('relax5-checkbox').checked=false; toggleUnicorns();">✕ Detener</button>
+    </div>
+
+    <!-- ═══ MOMENTO RELAX 4 — GATO PERSIGUE RATÓN ═══ -->
+    <div class="chase-overlay" id="chase-overlay" aria-hidden="true">
+        <canvas id="chase-canvas"></canvas>
+        <button class="chase-stop-btn" onclick="document.getElementById('relax4-checkbox').checked=false; toggleChase();">✕ Detener</button>
+    </div>
+
+    <!-- ═══ MOMENTO RELAX 3 — GLOBOS ═══ -->
+    <div class="balloon-game-layer" id="balloon-layer" aria-label="Juego de globos">
+        <!-- HUD (aparece durante el juego) -->
+        <div class="bg-hud" id="bg-hud" style="display:none;">
+            <div class="bg-hud-item">
+                <div class="bg-hud-val" id="bg-score">0</div>
+                <div class="bg-hud-label">Puntos</div>
+            </div>
+            <div class="bg-hud-item">
+                <div class="bg-hud-val" id="bg-escaped" style="color:#FF9090;">0/3</div>
+                <div class="bg-hud-label">Escapados</div>
+            </div>
+            <button class="bg-hud-stop" onclick="stopBalloonGame()">✕ Salir</button>
+        </div>
+        <!-- Pantalla inicio -->
+        <div class="bg-screen" id="bg-start">
+            <div style="font-size:3.5rem;margin-bottom:0.5rem;">🎈</div>
+            <div class="bg-screen-title">¡Pincha los Globos!</div>
+            <div class="bg-screen-sub">Toca los globos antes de que escapen.<br>3 escapados = fin del juego.</div>
+            <div class="bg-screen-actions">
+                <button class="bg-btn bg-btn--play" onclick="startBalloonGame()">▶ ¡Jugar!</button>
+                <button class="bg-btn bg-btn--close" onclick="closeBalloonGame()">✕ Cerrar</button>
+            </div>
+        </div>
+        <!-- Pantalla fin -->
+        <div class="bg-screen hidden" id="bg-end">
+            <div style="font-size:2.5rem;margin-bottom:0.3rem;">🎉</div>
+            <div class="bg-screen-title">¡Juego terminado!</div>
+            <div class="bg-screen-score" id="bg-final-score">0</div>
+            <div class="bg-screen-sub" id="bg-final-msg">globos pinchados</div>
+            <div class="bg-screen-actions" style="margin-top:1rem;">
+                <button class="bg-btn bg-btn--play" onclick="startBalloonGame()">↺ Volver a jugar</button>
+                <button class="bg-btn bg-btn--close" onclick="closeBalloonGame()">✕ Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ MOMENTO RELAX 1 — OVERLAY DE BURBUJAS ═══ -->
+    <div class="relax1-overlay" id="relax1-overlay" aria-hidden="true"></div>
+
+    <!-- MODALES -->
+
+    <!-- ═══ MODAL SELECTOR DE CHARLAS ═══ -->
+    <div class="charla-pick-overlay" id="charla-pick-overlay" role="dialog" aria-modal="true" aria-label="Seleccionar charla">
+        <div class="charla-pick-box">
+            <div class="charla-pick-head">
+                <span class="charla-pick-head-title">¿A qué charla te interesa ir?</span>
+                <button class="charla-pick-close" onclick="closeCharlaModal()" aria-label="Cerrar">✕</button>
+            </div>
+            <div class="charla-pick-body">
+                <div class="charla-pick-grid">
+                    <!-- Card 0 -->
+                    <div class="charla-pick-card">
+                        <div class="charla-pick-img" style="background:linear-gradient(150deg,#1a3c2a,#2d6b4a);">
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.22" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid slice"><path d="M0,50 Q50,10 100,50 T200,50" fill="none" stroke="#a8c49a" stroke-width="2.5"/><path d="M0,72 Q50,32 100,72 T200,72" fill="none" stroke="#a8c49a" stroke-width="1.5"/></svg>
+                        </div>
+                        <div class="charla-pick-body-card">
+                            <div class="charla-pick-date">2 Jul · Online</div>
+                            <div class="charla-pick-title">Interfaces Sensoriales</div>
+                        </div>
+                        <button class="charla-pick-btn" onclick="selectCharla(0)">Elegir esta charla →</button>
+                    </div>
+                    <!-- Card 1 -->
+                    <div class="charla-pick-card">
+                        <div class="charla-pick-img" style="background:linear-gradient(150deg,#2a1a3c,#4a2d6b);">
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.22" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid slice"><ellipse cx="100" cy="50" rx="75" ry="30" fill="none" stroke="#c5b8de" stroke-width="2.5"/><ellipse cx="100" cy="50" rx="42" ry="17" fill="none" stroke="#c5b8de" stroke-width="1.5"/></svg>
+                        </div>
+                        <div class="charla-pick-body-card">
+                            <div class="charla-pick-date">14 Ago · Presencial</div>
+                            <div class="charla-pick-title">Vibración de Baja Frec.</div>
+                        </div>
+                        <button class="charla-pick-btn" onclick="selectCharla(1)">Elegir esta charla →</button>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="charla-pick-card">
+                        <div class="charla-pick-img" style="background:linear-gradient(150deg,#3c1a1a,#7a3d3d);">
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.22" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid slice"><path d="M100,92 C60,70 15,58 100,8 C185,58 140,70 100,92Z" fill="none" stroke="#f5c4bb" stroke-width="2.5"/></svg>
+                        </div>
+                        <div class="charla-pick-body-card">
+                            <div class="charla-pick-date">5 Sep · Mixta</div>
+                            <div class="charla-pick-title">Burnout del Cuidador</div>
+                        </div>
+                        <button class="charla-pick-btn" onclick="selectCharla(2)">Elegir esta charla →</button>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="charla-pick-card">
+                        <div class="charla-pick-img" style="background:linear-gradient(150deg,#1a2e3c,#2d5a6b);">
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.22" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid slice"><rect x="12" y="18" width="48" height="48" rx="5" fill="none" stroke="#a8d4e0" stroke-width="1.8"/><rect x="78" y="10" width="48" height="48" rx="5" fill="none" stroke="#a8d4e0" stroke-width="1.8"/><rect x="144" y="22" width="44" height="44" rx="5" fill="none" stroke="#a8d4e0" stroke-width="1.8"/></svg>
+                        </div>
+                        <div class="charla-pick-body-card">
+                            <div class="charla-pick-date">Oct · Presencial+Online</div>
+                            <div class="charla-pick-title">Semana de Inclusión</div>
+                        </div>
+                        <button class="charla-pick-btn" onclick="selectCharla(3)">Elegir esta charla →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ CAJA FUERTE (contraseña secreta del logo) ═══ -->
+    <div class="safe-overlay" id="safe-overlay" role="dialog" aria-modal="true" aria-label="Caja fuerte">
+        <div class="safe-door" id="safe-door">
+            <div class="safe-rust" aria-hidden="true"></div>
+            <div class="safe-handle" aria-hidden="true"></div>
+            <button class="safe-close-btn" onclick="closeSafe()" aria-label="Cerrar">✕</button>
+            <div class="safe-dial" aria-hidden="true">⊙</div>
+            <div class="safe-title">Panel Protegido</div>
+            <p style="color:rgba(240,208,144,0.7);font-size:0.78rem;margin-bottom:1rem;">Ingresa el código de acceso</p>
+            <div class="safe-pin-display" id="safe-pin-display">
+                <div class="safe-pin-dot" id="spd-0"></div>
+                <div class="safe-pin-dot" id="spd-1"></div>
+                <div class="safe-pin-dot" id="spd-2"></div>
+                <div class="safe-pin-dot" id="spd-3"></div>
+            </div>
+            <div class="safe-keypad" id="safe-keypad">
+                <button class="safe-key" onclick="safeKeyPress('1')">1</button>
+                <button class="safe-key" onclick="safeKeyPress('2')">2</button>
+                <button class="safe-key" onclick="safeKeyPress('3')">3</button>
+                <button class="safe-key" onclick="safeKeyPress('4')">4</button>
+                <button class="safe-key" onclick="safeKeyPress('5')">5</button>
+                <button class="safe-key" onclick="safeKeyPress('6')">6</button>
+                <button class="safe-key" onclick="safeKeyPress('7')">7</button>
+                <button class="safe-key" onclick="safeKeyPress('8')">8</button>
+                <button class="safe-key" onclick="safeKeyPress('9')">9</button>
+                <button class="safe-key" onclick="safeKeyPress('backspace')" style="font-size:1rem;">⌫</button>
+                <button class="safe-key" onclick="safeKeyPress('0')">0</button>
+                <button class="safe-key" onclick="safeKeyPress('enter')" style="font-size:0.85rem;font-family:sans-serif;">↵</button>
+            </div>
+            <div class="safe-err" id="safe-err"></div>
+        </div>
+    </div>
+
+    <!-- ═══ PANEL ADMIN ═══ -->
+    <div class="admin-modal" id="admin-modal" role="dialog" aria-modal="true" aria-label="Panel de administración">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M9 14L12 17L19 10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div>
+                    <div style="font-family:'Caveat',cursive;font-size:1.35rem;font-weight:700;color:#fff;">Panel de Administración</div>
+                    <div style="font-size:0.72rem;color:rgba(255,255,255,0.65);">SensoriArte CMS interno · acceso restringido</div>
+                </div>
+                <button onclick="closeAdmin()" style="margin-left:auto;background:rgba(255,255,255,0.15);border:none;color:#fff;width:2rem;height:2rem;border-radius:50%;cursor:pointer;font-size:1.1rem;" aria-label="Cerrar panel">✕</button>
+            </div>
+            <div class="admin-tabs" id="admin-tabs">
+                <button class="admin-tab is-active" onclick="switchAdminTab('flyers')">🪧 Flyers</button>
+                <button class="admin-tab" onclick="switchAdminTab('avisos')">📝 Avisos</button>
+                <button class="admin-tab" onclick="switchAdminTab('bandas')">🎵 Bandas de Trabajo</button>
+                <button class="admin-tab" onclick="switchAdminTab('correo')">📧 Correo</button>
+            </div>
+            <div class="admin-body">
+
+                <!-- TAB: FLYERS -->
+                <div class="admin-section is-active" id="admin-tab-flyers">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 style="font-family:'Caveat',cursive;font-size:1.2rem;font-weight:700;color:#3D5230;">Gestión de Flyers / Charlas</h3>
+                        <button class="admin-btn admin-btn--green" onclick="adminAddFlyer()">+ Nueva Charla</button>
+                    </div>
+                    <table class="admin-table" id="admin-flyers-table">
+                        <thead><tr><th>Título</th><th>Fecha</th><th>Color</th><th>Acciones</th></tr></thead>
+                        <tbody id="admin-flyers-tbody"></tbody>
+                    </table>
+                    <!-- Formulario crear/editar flyer -->
+                    <div id="admin-flyer-form" style="display:none;margin-top:1rem;padding:1rem;background:rgba(168,196,154,0.1);border-radius:0.75rem;border:1.5px dashed rgba(168,196,154,0.35);">
+                        <h4 style="font-weight:700;color:#3D5230;margin-bottom:0.75rem;font-size:0.9rem;" id="admin-flyer-form-title">Nueva Charla</h4>
+                        <div style="display:grid;gap:0.6rem;">
+                            <input class="admin-input" id="af-titulo" placeholder="Título de la charla">
+                            <input class="admin-input" id="af-fecha" placeholder="Fecha (ej: Julio 2, 2026)">
+                            <input class="admin-input" id="af-desc" placeholder="Descripción breve">
+                            <select class="admin-input" id="af-color">
+                                <option value="green">Verde (Salud / Naturaleza)</option>
+                                <option value="purple">Púrpura (Sensorial)</option>
+                                <option value="coral">Coral (Emocional)</option>
+                                <option value="teal">Teal (Digital / Tech)</option>
+                            </select>
+                            <div style="display:flex;gap:0.5rem;">
+                                <button class="admin-btn admin-btn--green" onclick="adminSaveFlyer()">Guardar</button>
+                                <button class="admin-btn admin-btn--gray" onclick="document.getElementById('admin-flyer-form').style.display='none'">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: AVISOS -->
+                <div class="admin-section" id="admin-tab-avisos">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 style="font-family:'Caveat',cursive;font-size:1.2rem;font-weight:700;color:#3D5230;">Gestión de Avisos en Cartelera</h3>
+                        <button class="admin-btn admin-btn--green" onclick="adminAddAviso()">+ Nuevo Aviso</button>
+                    </div>
+                    <table class="admin-table" id="admin-avisos-table">
+                        <thead><tr><th>Autor</th><th>Tipo</th><th>Mensaje</th><th>Acciones</th></tr></thead>
+                        <tbody id="admin-avisos-tbody"></tbody>
+                    </table>
+                    <div id="admin-aviso-form" style="display:none;margin-top:1rem;padding:1rem;background:rgba(168,196,154,0.1);border-radius:0.75rem;border:1.5px dashed rgba(168,196,154,0.35);">
+                        <h4 style="font-weight:700;color:#3D5230;margin-bottom:0.75rem;font-size:0.9rem;" id="admin-aviso-form-title">Nuevo Aviso</h4>
+                        <div style="display:grid;gap:0.6rem;">
+                            <input class="admin-input" id="aa-autor" placeholder="Autor / Organización">
+                            <select class="admin-input" id="aa-tipo">
+                                <option value="comunidad">Comunidad / Vecinal</option>
+                                <option value="emergencia">Emergencia / Salud</option>
+                            </select>
+                            <textarea class="admin-input" id="aa-texto" rows="3" placeholder="Texto del aviso"></textarea>
+                            <input class="admin-input" id="aa-fecha" placeholder="Fecha (ej: Aviso Permanente)">
+                            <div style="display:flex;gap:0.5rem;">
+                                <button class="admin-btn admin-btn--green" onclick="adminSaveAviso()">Guardar</button>
+                                <button class="admin-btn admin-btn--gray" onclick="document.getElementById('admin-aviso-form').style.display='none'">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: BANDAS DE TRABAJO -->
+                <div class="admin-section" id="admin-tab-bandas">
+                    <h3 style="font-family:'Caveat',cursive;font-size:1.2rem;font-weight:700;color:#3D5230;margin-bottom:1rem;">Bandas de Trabajo (Frecuencias)</h3>
+                    <table class="admin-table">
+                        <thead><tr><th>Frecuencia</th><th>Tag</th><th>Título</th><th>Descripción</th><th>Visibilidad</th></tr></thead>
+                        <tbody>
+                            <tr><td>40 Hz</td><td><span style="color:#8B6914">Musical</span></td><td>Musical Inmersivo</td><td>Instrumentos reales con vibraciones...</td><td><button class="admin-btn admin-btn--gray" style="font-size:0.72rem">👁 Visible</button></td></tr>
+                            <tr><td>VR</td><td><span style="color:#3949AB">VR</span></td><td>Realidad Mixta</td><td>Mundos virtuales con controles...</td><td><button class="admin-btn admin-btn--gray" style="font-size:0.72rem">👁 Visible</button></td></tr>
+                            <tr><td>Neuro</td><td><span style="color:#6B8F5E">Gratuito</span></td><td>Música Neurodivergencia</td><td>Clases con aprendizaje alternativo...</td><td><button class="admin-btn admin-btn--gray" style="font-size:0.72rem">👁 Visible</button></td></tr>
+                            <tr><td>Contención</td><td><span style="color:#C97064">Coral</span></td><td>Cuidadoras & Familia</td><td>Talleres y charlas...</td><td><button class="admin-btn admin-btn--gray" style="font-size:0.72rem">👁 Visible</button></td></tr>
+                            <tr><td>Comunidad</td><td><span style="color:#5A6B8F">Cap</span></td><td>Capacitación en Inclusión</td><td>Formación para educadores...</td><td><button class="admin-btn admin-btn--gray" style="font-size:0.72rem">👁 Visible</button></td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size:0.75rem;color:#888;margin-top:1rem;">* Gestión completa de contenido de frecuencias disponible en versión futura.</p>
+                </div>
+
+                <!-- TAB: CORREO -->
+                <div class="admin-section" id="admin-tab-correo">
+                    <div style="text-align:center;padding:3rem 1rem;">
+                        <div style="width:5rem;height:5rem;border-radius:1.5rem;background:rgba(107,143,154,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="4" y="8" width="28" height="20" rx="3" stroke="#6B8F9A" stroke-width="2"/><path d="M4 12L18 21L32 12" stroke="#6B8F9A" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3 style="font-family:'Caveat',cursive;font-size:1.5rem;font-weight:700;color:#3D5230;margin-bottom:0.5rem;">Integración con Correo Institucional</h3>
+                        <p style="font-size:0.85rem;color:#666;max-width:340px;margin:0 auto;">La integración con el correo institucional de SensoriArte se configurará próximamente. Este módulo permitirá enviar notificaciones automáticas de inscripciones y avisos.</p>
+                        <div style="margin-top:1.5rem;padding:0.75rem 1.25rem;background:rgba(107,143,154,0.1);border-radius:0.75rem;display:inline-block;">
+                            <span style="font-size:0.78rem;font-weight:700;color:#6B8F9A;">📧 contacto@sensoriarte.cl</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="charla-info-modal" class="hidden fixed inset-0 bg-sensori-charcoal/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="charla-info-title" onclick="if(event.target===this)closeCharlaInfo()">
+        <div class="charla-info-box">
+            <button type="button" onclick="closeCharlaInfo()" class="charla-info-close" aria-label="Cerrar ventana">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="charla-info-photo">
+                <img id="charla-info-img" src="" alt="">
+            </div>
+            <div class="charla-info-body">
+                <span class="freq-tag text-sensori-orangeDeep">Charla comunitaria</span>
+                <h3 id="charla-info-title" class="text-2xl md:text-3xl font-hand font-bold text-sensori-purpleDeep mt-3">Título</h3>
+                <p id="charla-info-meta" class="charla-info-meta"></p>
+                <p id="charla-info-desc" class="text-base text-gray-700 leading-relaxed mt-3"></p>
+            </div>
+            <button type="button" class="charla-info-asistir" onclick="asistirCharlaDesdeInfo()" aria-label="Asistir a esta charla">
+                asistir
+            </button>
+        </div>
+    </div>
+
+    <div id="charla-modal" class="hidden fixed inset-0 bg-sensori-charcoal/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="bg-[#F3EDE0] p-8 rounded-3xl border-2 border-sensori-orange/30 shadow-2xl max-w-md w-full relative">
+            <button onclick="closeInscripcionModal()" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none" aria-label="Cerrar ventana">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600"></i>
+            </button>
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-sensori-orange/20 rounded-2xl flex items-center justify-center text-sensori-orange mx-auto">
+                    <i data-lucide="ticket" class="w-8 h-8"></i>
+                </div>
+                <h3 id="modal-title" class="text-2xl font-hand font-bold text-sensori-purpleDeep">¡Inscripción Exclusiva!</h3>
+                <p class="text-base text-gray-600">
+                    Estás reservando tu entrada gratuita para la charla: <br>
+                    <strong id="charla-seleccionada" class="text-sensori-orange">Nombre de Charla</strong>
+                </p>
+                <form onsubmit="handleCharlaInscripcion(event)" class="space-y-3 pt-2">
+                    <input type="text" id="ins-name" required placeholder="Tu Nombre Completo" class="w-full p-3 rounded-xl border border-gray-300 text-base bg-white focus:ring-2 focus:ring-sensori-orange focus:outline-none">
+                    <input type="email" id="ins-email" required placeholder="Tu Correo Electrónico" class="w-full p-3 rounded-xl border border-gray-300 text-base bg-white focus:ring-2 focus:ring-sensori-orange focus:outline-none">
+                    <button type="submit" class="w-full bg-sensori-orange text-white py-3 rounded-xl font-bold hover:bg-sensori-purple transition-colors text-base" min-width="48">
+                        Confirmar Mi Asistencia Gratis
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="therapy-modal" class="hidden fixed inset-0 bg-sensori-night/70 therapy-modal-overlay z-[110] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="therapy-modal-title" onclick="if(event.target===this)closeTherapyModal()">
+        <div class="bg-[#F3EDE0] rounded-3xl border-2 border-sensori-purple/25 shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button onclick="closeTherapyModal()" class="sticky top-4 float-right mr-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sensori-cyan z-10 shadow-sm" aria-label="Cerrar ventana">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600"></i>
+            </button>
+            <div class="p-6 md:p-8 space-y-6 clear-both">
+                <div>
+                    <span id="therapy-modal-tag" class="freq-tag text-sensori-cyan text-sm">Experiencia terapéutica</span>
+                    <h3 id="therapy-modal-title" class="text-2xl md:text-3xl font-hand font-bold text-sensori-purpleDeep mt-3">Título</h3>
+                </div>
+                <div id="therapy-modal-gallery" class="therapy-gallery flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
+                    <!-- Galería inyectada por JS -->
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-base font-bold text-sensori-purpleDeep uppercase tracking-wider mb-2">¿Cómo funciona?</h4>
+                        <p id="therapy-modal-tecnico" class="text-base text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-sensori-cyan uppercase tracking-wider mb-2">Base cognitiva y sensorial</h4>
+                        <p id="therapy-modal-cognitivo" class="text-base text-gray-700 leading-relaxed"></p>
+                    </div>
+                    <div class="bg-gradient-to-r from-sensori-purple/8 to-sensori-cyan/8 p-4 rounded-2xl border border-sensori-purple/15">
+                        <h4 class="text-base font-bold text-sensori-purpleDeep mb-2">Beneficios observados</h4>
+                        <ul id="therapy-modal-beneficios" class="text-base text-gray-700 space-y-1.5 list-disc list-inside"></ul>
+                    </div>
+                </div>
+                <a href="#contacto" onclick="closeTherapyModal()" class="inline-flex items-center gap-2 bg-sensori-purpleDeep text-white px-6 py-3 rounded-full font-semibold hover:bg-sensori-cyan transition-colors text-base">
+                    <span>Solicitar esta experiencia</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="general-modal" class="hidden fixed inset-0 bg-sensori-charcoal/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="gen-modal-title">
+        <div class="bg-[#F3EDE0] p-8 rounded-3xl border-2 border-sensori-green/30 shadow-2xl max-w-sm w-full text-center space-y-4">
+            <div class="w-16 h-16 bg-sensori-green/20 rounded-2xl flex items-center justify-center text-sensori-green mx-auto">
+                <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+            </div>
+            <h3 id="gen-modal-title" class="text-2xl font-hand font-bold text-sensori-purpleDeep">¡Enviado con Éxito!</h3>
+            <p id="gen-modal-text" class="text-base text-gray-600">Tu solicitud ha sido enviada con mucho cariño. Nos pondremos en contacto contigo a la brevedad.</p>
+            <button onclick="closeGeneralModal()" class="w-full bg-sensori-green text-white py-3 rounded-xl font-bold hover:bg-sensori-purple transition-colors text-base" min-width="48">
+                Aceptar
+            </button>
+        </div>
+    </div>
+
+    <!-- ADN musical: xilófono de vidrio (Codrops / Three.js) — se abre con el logo -->
+    <div id="xylophone-overlay" class="xylo-overlay" hidden aria-hidden="true">
+        <div class="xylo-overlay__chrome">
+            <p class="xylo-overlay__hint">Pasa el cursor por las barras · Esc o logo para salir</p>
+            <button type="button" id="xylo-close" class="xylo-overlay__close" aria-label="Cerrar ADN musical">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div id="xylo-file-warn" class="xylo-overlay__file-warn" hidden>
+            <p class="xylo-overlay__file-warn-title">El ADN musical necesita un servidor local</p>
+            <p>Lo estás abriendo como archivo (<code>file://</code>). El xilófono 3D no puede cargar así.</p>
+            <p>Abre en el navegador: <a href="http://localhost:8765/" target="_blank" rel="noopener">http://localhost:8765</a></p>
+            <p class="xylo-overlay__file-warn-alt">O usa Live Server / “Open with Live Server” en VS Code o Cursor.</p>
+        </div>
+        <iframe id="xylophone-frame" class="xylo-overlay__frame" title="ADN musical — xilófono de vidrio interactivo" src="about:blank" allow="autoplay" allowtransparency="true"></iframe>
+    </div>
+
+    <!-- Enlace al archivo JS externo -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/granim@2.0.0/dist/granim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.cells.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
